@@ -300,6 +300,8 @@ $string['loginlocalintro'] = 'Login with your Moodle account';
 // ... ... Setting: IDP login intro.
 $string['loginidpshowintrosetting'] = 'IDP login intro';
 $string['loginidpshowintrosetting_desc'] = 'With this setting, you control if the <em>\'{$a}\'</em> intro is shown above the IDP login buttons or not. By default, the intro is shown and users will be quickly informed what the IDP buttons are about. If you disable this setting, the IDP intro is hidden. This allows you to provide a clean user login interface if you just use external identity providers like OAuth2 or OIDC.';
+$string['splitidentityprovidersetting'] = 'Split identity providers';
+$string['splitidentityprovidersetting_desc'] = 'With this setting, identity providers will be split into two groups - OIDC providers and other providers. This allows you to place them in different locations on the login page.';
 // ... Section: Login order.
 $string['loginorderheading'] = 'Login order';
 $string['loginorderheading_desc'] = 'With these settings, you control the order of the login methods in the login form. The presented order will be defined from lowest to highest ordinal number, skipping all login methods and login form elements which are disabled in Moodle.';

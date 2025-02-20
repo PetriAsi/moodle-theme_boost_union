@@ -788,6 +788,13 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         $page->hide_if('theme_boost_union/loginlocalshowintro', 'theme_boost_union/loginlocalloginenable', 'neq',
             THEME_BOOST_UNION_SETTING_SELECT_YES);
 
+        // Setting: Split identity providers
+        $name = 'theme_boost_union/splitidentityproviders';
+        $title = get_string('splitidentityprovidersetting', 'theme_boost_union', null, true);
+        $description = get_string('splitidentityprovidersetting_desc', 'theme_boost_union', null, true);
+        $setting = new admin_setting_configselect($name, $title, $description, THEME_BOOST_UNION_SETTING_SELECT_NO, $yesnooption);
+        $tab->add($setting);
+
         // Setting: IDP login intro.
         $name = 'theme_boost_union/loginidpshowintro';
         $title = get_string('loginidpshowintrosetting', 'theme_boost_union', null, true);
