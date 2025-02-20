@@ -561,8 +561,8 @@ class core_renderer extends \theme_boost\output\core_renderer {
             $context->identityprovidersoidc = [];
             $context->identityprovidersrest = [];
             foreach ($context->identityproviders as $idp) {
-                if (strpos($idp->name, '365') !== false) {
-                    $context->identityproviders365[] = $idp;
+                if (strpos($idp->url, 'oidc') !== false)) {
+                    $context->identityprovidersoidc[] = $idp;
                 } else {
                     $context->identityprovidersrest[] = $idp;
                 }
