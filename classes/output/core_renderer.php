@@ -567,7 +567,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
                     $context->identityprovidersrest[] = $idp;
                 }
             }
-            $content->splitidentityproviders = $splitidentityproviders;
+            $context->splitidentityproviders = $splitidentityproviders;
         }
         
         // Check if the IDP login intro is enabled.
