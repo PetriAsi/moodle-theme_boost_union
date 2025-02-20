@@ -554,7 +554,22 @@ class core_renderer extends \theme_boost\output\core_renderer {
             // Add marker to show the local login intro to template context.
             $context->showlocalloginintro = true;
         }
-
+        # Split identityproviders into two arrays, one for 365 login
+        # and one for the rest
+        $splitidentityproviders= get_config('theme_boost_union', 'splitidentityproviders');
+        if ($splitidentityproviders) {
+            $context->identityprovidersoidc = [];
+            $context->identityprovidersrest = [];
+            foreach ($context->identityproviders as $idp) {
+                if (strpos($idp->name, '365') !== false) {
+                    $context->identityproviders365[] = $idp;
+                } else {
+                    $context->identityprovidersrest[] = $idp;
+                }
+            }
+            $content->splitidentityproviders = $splitidentityproviders;
+        }
+        
         // Check if the IDP login intro is enabled.
         $loginidpshowintrosetting = get_config('theme_boost_union', 'loginidpshowintro');
         $showidploginintro = ($loginidpshowintrosetting != false) ?

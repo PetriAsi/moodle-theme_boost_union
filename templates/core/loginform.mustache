@@ -31,6 +31,9 @@
     * hasidentityproviders - Flag, set to true to hide identity providers,
     * hasinstructions - Flag, set to true to show instructions,
     * identityproviders - List of identiy providers,
+    * splitidentityproviders - split oidc-auth from other providers
+    * identityprovidersoidc - Containing just oidc provider
+    * identityprovidersrest - all rest providers 
     * instructions - Instructions,
     * instructionsformat - Format of instructions,
     * loginurl - Login url,
@@ -84,6 +87,9 @@
         "hasidentityproviders": false,
         "hasinstructions": true,
         "identityproviders": [],
+        "splitidentityproviders": false,
+        "identityprovidersoidc": [],
+        "identityprovidersrest": [],
         "instructions": "For full access to this site, you first need to create an account.",
         "instructionsformat": "1",
         "loginurl": "http://localhost/stable_master/login/index.php",
@@ -111,6 +117,7 @@
     * Added the possibility to hide the IDP login intro.
     * Added the possibility to show a local login intro.
     * Added the possibility to change the login method order by adding wrapper divs around each login method.
+    * Added the possibility to split oidc provider and other providers
 }}
 
 <div class="loginform">
@@ -140,13 +147,47 @@
         <a href="{{signupurl}}" class="sr-only">{{#str}} tocreatenewaccount {{/str}}</a>
     {{/cansignup}}
     <div id="theme_boost_union-loginorder">
+    {{#hasidentityproviders}}
+    <div id="theme_boost_union-loginorder-idp" class="theme_boost_union-loginmethod">
+        <div class="login-divider"></div>
+        <div class="login-identityproviders">
+            {{#showidploginintro}}
+            <h2 class="login-heading">{{#str}} potentialidps, auth {{/str}}</h2>
+            {{/showidploginintro}}
+            
+            {{^splitidentityproviders}}
+                {{#identityproviders}}
+                    <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
+                        {{#iconurl}}
+                            <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                        {{/iconurl}}
+                        {{name}}
+                    </a>
+                {{/identityproviders}}
+            {{/splitidentityproviders}}
+
+            {{#splitidentityproviders}}
+                {{#identityprovidersoidc}}
+                    <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
+                        {{#iconurl}}
+                            <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                        {{/iconurl}}
+                        {{name}}
+                    </a>
+                {{/identityprovidersoidc}}
+            {{/splitidentityproviders}}
+        </div>
+    </div>
+    {{/hasidentityproviders}}
     {{#showlocallogin}}
+    <div class="login-divider"></div>
+    <button class="btn btn-secondary btn-lg" type="button" data-toggle="collapse" data-target="#login" id="togglelogin">Muut käyttäjät</button>
     <div id="theme_boost_union-loginorder-local" class="theme_boost_union-loginmethod">
     <div class="login-divider"></div>
     {{#showlocalloginintro}}
     <h2 class="login-heading">{{#str}} loginlocalintro, theme_boost_union {{/str}}</h2>
     {{/showlocalloginintro}}
-    <form class="login-form" action="{{loginurl}}" method="post" id="login">
+    <form class="login-form collapse" action="{{loginurl}}" method="post" id="login">
         <input id="anchor" type="hidden" name="anchor" value="">
         <script>document.getElementById('anchor').value = location.hash;</script>
         <input type="hidden" name="logintoken" value="{{logintoken}}">
@@ -164,9 +205,9 @@
                 !}}value="{{username}}" {{!
                 !}}placeholder="{{^canloginbyemail}}{{#cleanstr}}username{{/cleanstr}}{{/canloginbyemail}}{{!
                 !}}{{#canloginbyemail}}{{#cleanstr}}usernameemail{{/cleanstr}}{{/canloginbyemail}}" {{!
-                !}}autocomplete="username">
+                !}}autocomplete="email">
         </div>
-        <div class="login-form-password mb-3">
+        <div class="login-form-password mb-3 hidden">
             <label for="password" class="sr-only">{{#str}} password {{/str}}</label>
             <input type="password" name="password" id="password" value="" {{!
                 !}}class="form-control form-control-lg" {{!
@@ -181,30 +222,26 @@
         <div class="login-form-submit mb-3">
             <button class="btn btn-primary btn-lg" type="submit" id="loginbtn">{{#str}}login{{/str}}</button>
         </div>
-        <div class="login-form-forgotpassword mb-3">
-            <a href="{{forgotpasswordurl}}">{{#str}}forgotaccount{{/str}}</a>
+    {{#hasidentityproviders}}
+        {{#splitidentityproviders}}
+        <div id="theme_boost_union-loginorder-idp-rest" class="theme_boost_union-loginmethod">
+                {{#identityprovidersrest}}
+                    <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
+                        {{#iconurl}}
+                            <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                        {{/iconurl}}
+                        {{name}}
+                    </a>
+                {{/identityprovidersrest}}
         </div>
+      {{/splitidentityproviders}}
+      
+    {{/hasidentityproviders}}
+
     </form>
     </div>
     {{/showlocallogin}}
-    {{#hasidentityproviders}}
-    <div id="theme_boost_union-loginorder-idp" class="theme_boost_union-loginmethod">
-        <div class="login-divider"></div>
-        <div class="login-identityproviders">
-            {{#showidploginintro}}
-            <h2 class="login-heading">{{#str}} potentialidps, auth {{/str}}</h2>
-            {{/showidploginintro}}
-            {{#identityproviders}}
-                <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
-                    {{#iconurl}}
-                        <img src="{{iconurl}}" alt="" width="24" height="24"/>
-                    {{/iconurl}}
-                    {{name}}
-                </a>
-            {{/identityproviders}}
-        </div>
-    </div>
-    {{/hasidentityproviders}}
+    
     <div id="theme_boost_union-loginorder-firsttimesignup" class="theme_boost_union-loginmethod">
     {{#hasinstructions}}
         <div class="login-divider"></div>
