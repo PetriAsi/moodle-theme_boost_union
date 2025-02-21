@@ -223,6 +223,8 @@
             <button class="btn btn-primary btn-lg" type="submit" id="loginbtn">{{#str}}login{{/str}}</button>
         </div>
     {{#hasidentityproviders}}
+        <div class="login-identityproviders">
+        
         {{#splitidentityproviders}}
         <div id="theme_boost_union-loginorder-idp-rest" class="theme_boost_union-loginmethod">
                 {{#identityprovidersrest}}
@@ -235,7 +237,7 @@
                 {{/identityprovidersrest}}
         </div>
       {{/splitidentityproviders}}
-      
+        </div>
     {{/hasidentityproviders}}
 
     </form>
