@@ -181,7 +181,7 @@
     {{/hasidentityproviders}}
     {{#showlocallogin}}
     <div class="login-divider"></div>
-    <button class="btn btn-secondary btn-lg" type="button" data-toggle="collapse" data-target="#login" id="togglelogin">Muut käyttäjät</button>
+    <button class="btn btn-secondary " type="button" data-toggle="collapse" data-target="#login" id="togglelogin">Muut käyttäjät</button>
     <div id="theme_boost_union-loginorder-local" class="theme_boost_union-loginmethod">
     <div class="login-divider"></div>
     {{#showlocalloginintro}}
@@ -228,7 +228,7 @@
         {{#splitidentityproviders}}
         <div id="theme_boost_union-loginorder-idp-rest" class="theme_boost_union-loginmethod">
                 {{#identityprovidersrest}}
-                    <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
+                    <a class="btn login-identityprovider-btn btn-block btn-secondary btn-lg" href="{{url}}">
                         {{#iconurl}}
                             <img src="{{iconurl}}" alt="" width="24" height="24"/>
                         {{/iconurl}}
