@@ -6,6 +6,31 @@ Changes
 
 ### Unreleased
 
+* 2025-03-25 - Bugfix: If a course category is hidden, the "go to course" button (in the course cards view) got a wrong color, resolves #877.
+* 2025-03-25 - Bugfix: Make sure that the sticky category headers (in the course cards view) does not cover the more menu, resolves #866.
+* 2025-03-25 - Bugfix: Do not show the sticky category headers (in the course cards view) for categories with just a few courses, resolves #866.
+* 2025-03-24 - Bugfix: SmartMenu caused JavaScript error 'Uncaught TypeError: moreMenu is null', resolves #850.
+* 2025-03-10 - Bugfix: Guests could not use the side entrance login page, resolves #653.
+* 2025-03-10 - Bugfix: Fix unwanted redirect to IdP from locallogin.php in case alternateloginurl is set, resolves #775.
+* 2025-03-10 - Improvement: Show a clearer warning to the admin about the risks of disabling the local login form, resolves #777.
+* 2025-03-10 - Improvement: Allow the side entrace login page to be enabled independent from the localloginenable setting, resolves #782
+
+### v4.4-r13
+
+* 2025-03-10 - Bugfix: The course details modal did not work on all site home widgets, resolves #851.
+* 2025-03-09 - Bugfix: The theme's SCSS could not be built if setting activityiconcolorfidelity was not set yet, resolves #838
+* 2025-03-09 - Upgrade: Remove theme_boost_union_before_standard_html_head and theme_boost_union_before_standard_top_of_body_html callbacks from Moodle 4.5 and 4.4 releases finally, resolves #640.
+* 2025-03-09 - Improvement: Introduce a Boost Union specific string for "submit" to be used in the accessbility support form which allows better translatons, resolves #830.
+* 2025-03-08 - Improvement: Add setting to limit the maximum width of the navbar logo if it is too broad or has a special aspect ratio, resolves #544.
+
+### v4.4-r12
+
+* 2025-02-22 - Feature: Add some styling to the category listings on site home and on the category index pages, resolves #840.
+* 2025-02-16 - Feature: Show the course listing on site home and on the category index pages as (proper) list, resolves #573.
+* 2025-02-07 - Feature: Show the course listing on site home and on the category index pages as cards, resolves #558.
+
+### v4.4-r11
+
 * 2025-02-12 - Bugfix: Accessibility page link in description differed from real location, resolves #818.
 
 ### v4.4-r10

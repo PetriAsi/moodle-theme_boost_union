@@ -37,6 +37,7 @@ $string['githubissueslink'] = '<a href="https://github.com/moodle-an-hochschulen
 // General select options.
 $string['never'] = 'Never';
 $string['always'] = 'Always';
+$string['auto'] = 'Automatically';
 $string['nochange'] = 'No change';
 $string['forguestsonly'] = 'Only for guests and non-logged-in users';
 
@@ -180,6 +181,9 @@ $string['bootstrapcolordangersetting'] = 'Bootstrap color for "Danger"';
 $string['bootstrapcolordangersetting_desc'] = 'The Bootstrap color for "Danger"';
 // ... Section: Navbar.
 $string['navbarheading'] = 'Navbar';
+// ... Section: Maximal width of logo in navbar.
+$string['maxlogowidth'] = 'Maximal width of logo in navbar';
+$string['maxlogowidth_desc'] = 'In the navbar, the uploaded compact logo is normally displayed with 100% height and proportional width. However, if the logo is too broad or has another special aspect ratio, you can set the maximal width of the logo in the navbar here. You can enter pixel-based values like 120px, but you can also enter a percentage-based value like 10% or a viewport-width value like 5vw. If you do not enter any value, the logo will be displayed with the default presentation.';
 // ... ... Setting: Navbar color.
 $string['navbarcolorsetting'] = 'Navbar color';
 $string['navbarcolorsetting_desc'] = 'With this setting, you can change the navbar color from the default light navbar to a dark one or a colored one.';
@@ -289,10 +293,10 @@ $string['loginformtransparencysetting_desc'] = 'With this setting, you can make 
 $string['loginprovidersheading'] = 'Login providers';
 // ... ... Setting: Local login form.
 $string['loginlocalloginenablesetting'] = 'Local login';
-$string['loginlocalloginenablesetting_desc'] = 'With this setting, you control if the local login form is shown on the login page or not. By default, the local login form is shown and users an login into the site as normal. If you disable this setting, the local login form is hidden. This allows you to just provide login buttons for external identity providers like OAuth2 or OIDC.';
-$string['loginlocalloginenablesetting_note'] = 'Please note: As soon as you hide the local login form, you risk that admins cannot log in anymore with a local account if there is a problem with the external identity provider. To allow local logins anyway in such cases, a <a href="{$a->url}">side entrance local login page</a> is provided. On this side entrance local login page, all of Moodle\'s login security measures apply as well.';
+$string['loginlocalloginenablesetting_desc'] = 'With this setting, you control if the local login form is shown on the login page or not. By default, the local login form is shown and users can login into the site as normal. If you disable this setting, the local login form is hidden. This allows you to just provide login buttons for external identity providers like OAuth2 or OIDC.';
+$string['loginlocalloginenablesetting_note'] = 'Please note: As soon as you hide the local login form, you risk that admins cannot log in anymore with a local account if there is a problem with the external identity provider. The same goes if no other authentication methods than manual authentication are enabled at all.<br />To allow local logins anyway in such cases, the <a href="{$a->url}">side entrance local login page</a> (see below for details) is enabled automatically. Please bookmark this URL as your own safety net.';
 $string['loginlocalloginformhead'] = 'Local login';
-$string['loginlocalloginlocalnotdisabled'] = 'The local login is enabled on the standard login form. There is no need to log in on this local login page here. Please use the <a href="{$a->url}">standard login page</a> for logging in.';
+$string['loginlocalloginlocalnotdisabled'] = 'There is no need to log in on this side entrance login page here. Please use the <a href="{$a->url}">standard login page</a> for logging in.';
 // ... ... Setting: Local login intro.
 $string['loginlocalshowintrosetting'] = 'Local login intro';
 $string['loginlocalshowintrosetting_desc'] = 'With this setting, you control if a <em>\'{$a}\'</em> intro is shown above the local login form or not. By default, the intro is not shown. But if you enable it, this intro may help users to understand which credentials to use in the local login form, especially if you provide more than one login method or if you have changed the order of the login methods.';
@@ -311,6 +315,11 @@ $string['loginorderlocalsetting'] = 'Local login';
 $string['loginorderidpsetting'] = 'IDP login';
 $string['loginorderfirsttimesignupsetting'] = 'Information for first time visitors & Self registration';
 $string['loginorderguestsetting'] = 'Guest login';
+// ... Section: Side entrance login.
+$string['sideentranceloginheading'] = 'Side entrance login';
+// ... ... Setting: Endable side entrance login.
+$string['sideentranceloginenablesetting'] = 'Enable side entrance login';
+$string['sideentranceloginenablesetting_desc'] = 'With this setting, you can enable a <a href="{$a->url}">side entrance local login page</a>. It is enabled automatically if you disable the local login form (see above), but you can also enable it constantly to allow local users to bypass the main login page and login process which is particularly helpful in SSO setups. On the side entrance local login page, all of Moodle\'s login security measures apply as well, of course.';
 
 // Settings: Dashboard / My courses tab.
 $string['dashboardtab'] = 'Dashboard / My courses';
@@ -322,6 +331,63 @@ $string['courseoverviewshowcourseimagessetting_desc'] = 'With this setting, you 
 // ... ... Setting: Show course completion progress.
 $string['courseoverviewshowprogresssetting'] = 'Show course completion progress';
 $string['courseoverviewshowprogresssetting_desc'] = 'With this setting, you can control whether the course completion progress is visible inside the course overview block or not.';
+
+// Settings: Category index / site home tab.
+$string['categoryindextab'] = 'Category index / Site home';
+// ... Section: Course listing.
+$string['courselistingheading'] = 'Course listing';
+// ... ... Setting: Course listing presentation.
+$string['courselistingpresentation'] = 'Course listing presentation';
+$string['courselistingpresentation_desc'] = 'With this setting, you can modify the look & feel of the course listing on the category index pages and on site home. As an alternative to the way how Moodle core presents them, you can present the course listing as course cards (similar to the course cards on the \'My courses\' page) or as course list (similar to the course list on the \'My courses\' page).';
+$string['courselistingpresentation_nochange'] = 'Designer\'s nightmare (unchanged as presented by Moodle core)';
+$string['courselistingpresentation_cards'] = 'Course cards';
+$string['courselistingpresentation_list'] = 'Course list';
+$string['courselistingpresentation_note'] = 'Please note: If you enable course cards or course lists, the <a href="{$a->url1}">coursesperpage</a> setting is still respected and will control how many cards / rows will be shown. However, the <a href="{$a->url2}">courseswithsummarieslimit</a> setting does not have any effect anymore – all courses will be shown with full details. Please take care not to set <a href="{$a->url1}">coursesperpage</a> too high to avoid long page load times on pages with many courses.';
+// ... ... Setting: Course card column count.
+$string['coursecardscolumncount'] = 'Course card column count';
+$string['coursecardscolumncount_desc'] = 'The course card grid will be presented in a responsive way and its columns will wrap on smaller screens. With this setting, you just control the maximum number of columns in the course card grid on larger screens. Setting the maximum number of columns to 2 instead of 3 might make the course cards look more spacious and less crowded. Setting the maximum number of columns to 1 is possible as well and will effectively turn the course listing in a vertical list of cards.';
+// ... ... Setting: Show course image in the course listing.
+$string['courselistinghowimage'] = 'Show course image in the course listing';
+$string['courselistinghowimage_desc'] = 'With this setting, you control if the course image is shown in the course listing or not.';
+// ... ... Setting: Show course contacts in the course listing.
+$string['courselistingshowcontacts'] = 'Show course contacts in the course listing';
+$string['courselistingshowcontacts_desc'] = 'With this setting, you control if the course contact\'s pictures are shown in the course listing or not. Please note: The contact pictures are shown together with the course image, thus presenting course contacts without presenting the course image is not possible.';
+// ... ... Setting: Show course shortname in the course listing.
+$string['courselistinghowshortname'] = 'Show course shortname in the course listing';
+$string['courselistinghowshortname_desc'] = 'With this setting, you control if the course shortname is shown in the course listing or not.';
+// ... ... Setting: Show course category in the course listing.
+$string['courselistinghowcategory'] = 'Show course category in the course listing';
+$string['courselistinghowcategory_desc'] = 'With this setting, you control if the course category is shown in the course listing or not.';
+// ... ... Setting: Show course completion progress in the course listing.
+$string['courselistinghowprogress'] = 'Show course completion progress in the course listing';
+$string['courselistinghowprogress_desc'] = 'With this setting, you control if the course completion progress are shown in the course listing or not.';
+// ... ... Setting: Show course enrolment icons in the course listing.
+$string['courselistinghowenrolicons'] = 'Show course enrolment icons in the course listing';
+$string['courselistinghowenrolicons_desc'] = 'With this setting, you control if the course enrolment icons are shown in the course listing or not.';
+// ... ... Setting: Show course fields in the course listing.
+$string['courselistinghowfields'] = 'Show course fields in the course listing';
+$string['courselistinghowfields_desc'] = 'With this setting, you control if the custom course fields are shown in the course listing or not.';
+// ... ... Setting: Show goto button in the course listing.
+$string['courselistinghowgoto'] = 'Show goto button in the course listing';
+$string['courselistinghowgoto_desc'] = 'With this setting, you control if a \'Go to course\' button is shown in the course listing or not. If this setting is disabled, the user is still able to go to the course by clicking on the course title or course image.';
+$string['courselistinggoto'] = 'Go to course';
+// ... ... Setting: Show details popup in the course listing.
+$string['courselistinghowpopup'] = 'Show details popup in the course listing';
+$string['courselistinghowpopup_desc'] = 'With this setting, you control if a \'Course details\' button is shown in the course listing or not. With this button, the user can open a details popup which contains the course summary, the course contacts and the course fields. The popup will contain this information regardless if you enabled it on the course card / row itself or not.';
+$string['courselistingpopup'] = 'Details';
+$string['courselistingummary'] = 'Course summary';
+$string['courselistingnosummary'] = 'This course does not have a summary';
+$string['courselistingcontacts'] = 'Course contact';
+$string['courselistingviewprofile'] = 'View profile';
+$string['courselistingfields'] = 'Course classification';
+// ... Section: Category listing.
+$string['categorylistingheading'] = 'Category listing';
+// ... ... Setting: Category listing presentation.
+$string['categorylistingpresentation'] = 'Category listing presentation';
+$string['categorylistingpresentation_desc'] = 'With this setting, you can modify the look & feel of the category listing on the category index pages and on site home. As an alternative to the way how Moodle core presents them, you can present the category listing as a refreshed list of boxes.';
+$string['categorylistingpresentation_nochange'] = 'Designer\'s nightmare (unchanged as presented by Moodle core)';
+$string['categorylistingpresentation_boxlist'] = 'List of boxes';
+$string['categorylistingpresentation_note'] = 'Please note: If you enabled the \'Course listing presentation\' setting above, we recommend to enable this setting as well. Both were designed to work together.';
 
 // Settings: Blocks tab.
 // The string for this tab is the same as on the 'Feel' page.
@@ -1099,6 +1165,7 @@ $string['accessibilitydeclarationlinkpositionsetting_desc'] = 'In this setting, 
 $string['accessibilitysupporttab'] = 'Support page';
 // ... Section: Accessibility support page.
 $string['accessibilitysupportheading'] = 'Accessibility support page';
+$string['accessibilitysupportsubmit'] = 'Submit';
 // ... ... Setting: Enable accessibility support page.
 $string['enableaccessibilitysupportsetting'] = 'Enable accessibility support page';
 $string['enableaccessibilitysupportsetting_desc'] = 'With this setting, you can enable a accessibility support page. It will behave similar to <a href="{$a->url}">Moodle core\'s site support page</a>.';

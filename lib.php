@@ -132,7 +132,14 @@ define('THEME_BOOST_UNION_SETTING_EXTSCSSSOURCE_GITHUB', 2);
 
 define('THEME_BOOST_UNION_SETTING_SELECT_NEVER', 'never');
 define('THEME_BOOST_UNION_SETTING_SELECT_ALWAYS', 'always');
+define('THEME_BOOST_UNION_SETTING_SELECT_AUTO', 'auto');
 define('THEME_BOOST_UNION_SETTING_SELECT_ONLYGUESTSANDNONLOGGEDIN', 'guestandnonloggedin');
+
+define('THEME_BOOST_UNION_SETTING_COURSELISTPRES_NOCHANGE', 'nochange');
+define('THEME_BOOST_UNION_SETTING_COURSELISTPRES_CARDS', 'cards');
+define('THEME_BOOST_UNION_SETTING_COURSELISTPRES_LIST', 'list');
+define('THEME_BOOST_UNION_SETTING_CATLISTPRES_NOCHANGE', 'nochange');
+define('THEME_BOOST_UNION_SETTING_CATLISTPRES_BOXLIST', 'boxlist');
 
 /**
  * Returns the main SCSS content.
@@ -515,6 +522,9 @@ function theme_boost_union_get_extra_scss($theme) {
     // Setting: Activity icon purpose.
     $content .= theme_boost_union_get_scss_for_activity_icon_purpose($theme);
 
+    // Setting: Navbar styles.
+    $content .= theme_boost_union_get_scss_navbar($theme);
+
     // Setting: Mark external links.
     $content .= theme_boost_union_get_scss_to_mark_external_links($theme);
 
@@ -683,38 +693,6 @@ function theme_boost_union_pluginfile($course, $cm, $context, $filearea, $args, 
     } else {
         send_file_not_found();
     }
-}
-
-/**
- * Callback to add head elements (for releases up to Moodle 4.3).
- *
- * @return string
- */
-function theme_boost_union_before_standard_html_head() {
-    global $CFG;
-
-    // Require local library.
-    require_once($CFG->dirroot.'/theme/boost_union/locallib.php');
-
-    // Call and return callback implementation.
-    return theme_boost_union_callbackimpl_before_standard_html();
-}
-
-/**
- * Callback to add body elements on top (for releases up to Moodle 4.3).
- *
- * @return string
- * @throws coding_exception
- * @throws dml_exception
- */
-function theme_boost_union_before_standard_top_of_body_html() {
-    global $CFG;
-
-    // Require local library.
-    require_once($CFG->dirroot.'/theme/boost_union/locallib.php');
-
-    // Call and return callback implementation.
-    return theme_boost_union_callbackimpl_before_standard_top_of_body_html();
 }
 
 /**
