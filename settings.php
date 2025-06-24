@@ -25,6 +25,7 @@
 use theme_boost_union\admin_setting_configdatetime;
 use theme_boost_union\admin_setting_configstoredfilealwayscallback;
 use theme_boost_union\admin_setting_configtext_url;
+use theme_boost_union\admin_settingspage_tabs_with_tertiary;
 use core\di;
 use core\hook\manager as hook_manager;
 
@@ -137,12 +138,11 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         // (with 2 or 3 digits) or a viewport width number (from 0 to 100). Additionally the field can be left blank.
         $smallwidthoremptyregex = '/^((\d{1,2}|100)%)|((\d{1,2}|100)vw)|(\d{2,3}px)|(^(?!.*\S))$/';
 
-        // Create Look settings page with tabs
+        // Create Look settings page with tabs and tertiary navigation
         // (and allow users with the theme/boost_union:configure capability to access it).
-        $page = new theme_boost_admin_settingspage_tabs('theme_boost_union_look',
+        $page = new admin_settingspage_tabs_with_tertiary('theme_boost_union_look',
                 get_string('configtitlelook', 'theme_boost_union', null, true),
                 'theme/boost_union:configure');
-
 
         // Create general settings tab.
         $tab = new admin_settingpage('theme_boost_union_look_general', get_string('generalsettings', 'theme_boost', null, true));
@@ -1580,9 +1580,9 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         $ADMIN->add('theme_boost_union', $page);
 
 
-        // Create Feel settings page with tabs
+        // Create Feel settings page with tabs and tertiary navigation
         // (and allow users with the theme/boost_union:configure capability to access it).
-        $page = new theme_boost_admin_settingspage_tabs('theme_boost_union_feel',
+        $page = new admin_settingspage_tabs_with_tertiary('theme_boost_union_feel',
                 get_string('configtitlefeel', 'theme_boost_union', null, true),
                 'theme/boost_union:configure');
 
@@ -1662,6 +1662,20 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         $setting->set_updatedcallback('theme_reset_all_caches');
         $tab->add($setting);
 
+        // Setting: Starred courses popover cog icon link target.
+        $name = 'theme_boost_union/starredcourseslinktarget';
+        $title = get_string('starredcourseslinktargetsetting', 'theme_boost_union', null, true);
+        $description = get_string('starredcourseslinktargetsetting_desc', 'theme_boost_union', null, true);
+        $starredcourseslinktargetoptions = [
+                THEME_BOOST_UNION_SETTING_STARREDCOURSES_LINKTARGET_MYCOURSES => get_string('mycourses', 'core', null, false),
+                THEME_BOOST_UNION_SETTING_STARREDCOURSES_LINKTARGET_DASHBOARD => get_string('myhome', 'core', null, false),
+        ];
+        $setting = new admin_setting_configselect($name, $title, $description,
+                THEME_BOOST_UNION_SETTING_STARREDCOURSES_LINKTARGET_MYCOURSES, $starredcourseslinktargetoptions);
+        $tab->add($setting);
+        $page->hide_if('theme_boost_union/starredcourseslinktarget', 'theme_boost_union/shownavbarstarredcourses', 'neq',
+                THEME_BOOST_UNION_SETTING_SELECT_YES);
+
         // Create breadcrumbs heading.
         $name = 'theme_boost_union/breadcrumbsheading';
         $title = get_string('breadcrumbsheading', 'theme_boost_union', null, true);
@@ -1736,8 +1750,18 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         // Create block regions heading.
         $name = 'theme_boost_union/blockregionsheading';
         $title = get_string('blockregionsheading', 'theme_boost_union', null, true);
-        $description = get_string('blockregionsheading_desc', 'theme_boost_union', null, true);
+        $description = '';
         $setting = new admin_setting_heading($name, $title, $description);
+        $tab->add($setting);
+
+        // Show block regions intro.
+        $name = 'theme_boost_union/blockregionsintro';
+        $blockregionsintro = new \core\output\notification(
+                get_string('blockregionsheading_desc', 'theme_boost_union'), \core\output\notification::NOTIFY_INFO);
+        $blockregionsintro->set_show_closebutton(false);
+        $blockregionsintro->set_extra_classes(['alert-dark']);
+        $description = $OUTPUT->render($blockregionsintro);
+        $setting = new admin_setting_heading($name, '', $description);
         $tab->add($setting);
 
         // Add experimental warning.
@@ -2041,9 +2065,9 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         $ADMIN->add('theme_boost_union', $page);
 
 
-        // Create Content settings page with tabs
+        // Create Content settings page with tabs and tertiary navigation
         // (and allow users with the theme/boost_union:configure capability to access it).
-        $page = new theme_boost_admin_settingspage_tabs('theme_boost_union_content',
+        $page = new admin_settingspage_tabs_with_tertiary('theme_boost_union_content',
                 get_string('configtitlecontent', 'theme_boost_union', null, true),
                 'theme/boost_union:configure');
 
@@ -2914,9 +2938,9 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         $ADMIN->add('theme_boost_union', $page);
 
 
-        // Create Functionality settings page with tabs
+        // Create Functionality settings page with tabs and tertiary navigation
         // (and allow users with the theme/boost_union:configure capability to access it).
-        $page = new theme_boost_admin_settingspage_tabs('theme_boost_union_functionality',
+        $page = new admin_settingspage_tabs_with_tertiary('theme_boost_union_functionality',
                 get_string('configtitlefunctionality', 'theme_boost_union', null, true),
                 'theme/boost_union:configure');
 
@@ -3000,9 +3024,9 @@ if ($hassiteconfig || has_capability('theme/boost_union:configure', context_syst
         $ADMIN->add('theme_boost_union', $page);
 
 
-        // Create Accessibility settings page with tabs
+        // Create Accessibility settings page with tabs and tertiary navigation
         // (and allow users with the theme/boost_union:configure capability to access it).
-        $page = new theme_boost_admin_settingspage_tabs('theme_boost_union_accessibility',
+        $page = new admin_settingspage_tabs_with_tertiary('theme_boost_union_accessibility',
                 get_string('configtitleaccessibility', 'theme_boost_union', null, true),
                 'theme/boost_union:configure');
 

@@ -46,6 +46,10 @@
     .nav-link:hover,
     .nav-link:focus {
         color: $black !important; /* stylelint-disable-line declaration-no-important */
+
+        .icon {
+            color: $black !important; /* stylelint-disable-line declaration-no-important */
+        }
     }
 
     /* Change the background color and colors of open custom menu parent navigation items in the navbar
@@ -123,6 +127,12 @@
 
 /* Tweak the dark navbar with light font color a little bit more. */
 .navbar.navbar-dark.bg-dark {
+    /* If we are showing the search form, we need to show the border again as dark border
+       as otherwise the active node's bottom bar might peek through. */
+    &:has(#searchform-navbar.show) {
+        border-bottom: 1px solid #343a40;
+    }
+
     /* Change the background color of the custom child menu and user menu navigation items in the navbar
        to dark grey when hovered and focused (especially during keyboard navigation) */
     .nav-item.dropdown.show,
@@ -155,6 +165,12 @@
 
 /* Tweak the primary color navbar with light font color a little bit more. */
 .navbar.navbar-dark.bg-primary {
+    /* If we are showing the search form, we need to show the border again as dark border
+       as otherwise the active node's bottom bar might peek through. */
+    &:has(#searchform-navbar.show) {
+        border-bottom: 1px solid $primary;
+    }
+
     /* Change the background color of the custom child menu and user menu navigation items in the navbar
        to dark grey when hovered and focused (especially during keyboard navigation) */
     .nav-item.dropdown.show,
@@ -495,6 +511,15 @@
                     margin-left: calc(-2rem - 8px - 112px);
                 }
 
+                /* On small screens, we must not let the category listing exceed the container's width to avoid horizontal
+                   scroll bars. */
+                @include media-breakpoint-down(sm) {
+                    .theme_boost_union-courselisting-wrapper {
+                        width: calc(100% - 4rem);
+                        margin-left: 2rem;
+                    }
+                }
+
                 .categoryname .spinner {
                     margin-left: 0.5rem;
                 }
@@ -530,6 +555,21 @@
             > .category:last-child {
                 @extend .py-2;
             }
+        }
+    }
+}
+
+/* The search page 'show all' button, if the search page has modified course listings. */
+#page-course-search {
+    .paging:has(+ .theme_boost_union-courselisting-wrapper),
+    .theme_boost_union-courselisting-wrapper ~ .paging {
+        @extend .text-right;
+
+        a {
+            @extend .btn;
+            @extend .btn-secondary;
+            @extend .btn-sm;
+            @extend .mb-3;
         }
     }
 }
@@ -960,16 +1000,6 @@ body.theme-boost-union-commincourse {
     @include media-breakpoint-up(lg) {
         /* Move the Boost Union footer buttons when right drawer is shown. */
         right: calc(#{$drawer-right-width} + 2rem);
-    }
-}
-
-/* If the right-hand drawer is opened. */
-#page.drawers.show-drawer-right #back-to-top {
-    /* On smaller screens, the drawer opens as an overlay over the main content.
-       The back to top button looks misplaced then. */
-    @include media-breakpoint-down(lg) {
-        /* Hide the back to top button when right drawer is shown. */
-        display: none;
     }
 }
 
@@ -2538,8 +2568,11 @@ body.theme_boost-union-footerbuttonnone.jsenabled {
         display: none;
     }
     /* Changed the transition time to 0.3 seconds when smart menus are enabled */
-    .carousel .carousel-inner .carousel-item {
-        transition: transform 0.3s ease-in-out;
+    .theme-boost-union-smartmenu-carousel,
+    #usermenu-carousel {
+        .carousel-inner .carousel-item {
+            transition: transform 0.3s ease-in-out;
+        }
     }
 }
 

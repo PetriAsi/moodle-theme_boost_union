@@ -379,6 +379,10 @@ With this setting, you can add a 'Set preferred language' setting to the languag
 
 With this setting, you can show a popover menu with links to starred courses next to the messages and notifications menus.
 
+###### Starred courses popover cog icon link target
+
+With this setting, you can set the link target of the cog icon in the starred courses popover. By default, the cog icon links to the 'My courses' page. However, you can also link to the 'Dashboard' page, especially if you have disabled the 'My courses' page in the primary navigation.
+
 ##### Breadcrumbs
 
 ###### Display the category breadcrumbs in the course header
@@ -711,8 +715,8 @@ As you have read in the introduction, the main design principle of Boost Union i
   As soon as you click the footer button (questionmark icon) in the bottom right corner of the screen, a popover with several links appears. However, the content of this link list is far from being well-structured and looks more like a garage sale. When implementing the settings to individually suppress each of these popover links, we had to make some code re-arrangements which result in the fact that the popover links are slightly more well-structured even if you do not enable any setting in Boost Union.
 * Suppress footer outputs by plugin / core component:
   Due to the way how the settings `theme_boost_union | footersuppressstandardfooter_*` had to be built, it was not possible to quickly and reliably detect if Boost Union (or a Boost Union child theme) is the active theme. Thus, these settings are also applied if another theme than Boost Union is active. Please make sure to disable these settings if Boost Union is installed but should not be used.
-* Clickable header in the user's menu third level:
-  Due to the way how the smart menu was integrated into the user menu, as soon as at least one smart menu exists on the page, the header of the language menu in the user menu is now fully clickable - compared to Boost core where only the 'back' arrow in the language menu is clickable. This should be a neglectible difference to Boost core.
+* Clickable header and transition time in the user's menu third level:
+  Due to the way how the smart menu was integrated into the user menu, as soon as at least one smart menu exists on the page, the header of the language menu in the user menu is now fully clickable - compared to Boost core where only the 'back' arrow in the language menu is clickable - and the transition time to open the language menu is shortened. This should be a neglectible difference to Boost core.
 
 
 Companion plugin local_navbarplus
@@ -931,8 +935,9 @@ Moodle an Hochschulen e.V. would like to thank these main contributors (in alpha
 * Hochschule Hannover - University of Applied Sciences and Arts: Code, Funding, Ideating
 * Käferfreie Software, Nina Herrmann: Code
 * lern.link GmbH, Alexander Bias: Code, Peer Review, Ideating, Funding
-* lern.link GmbH, Lukas MuLu Müller: Code
 * lern.link GmbH, Beata Waloszczyk: Code
+* lern.link GmbH, Danou Nauck: Code
+* lern.link GmbH, Lukas MuLu Müller: Code
 * Lutheran University of Applied Sciences Nuremberg: Funding
 * Moodle.NRW / Ruhr University Bochum, Annika Lambert: Code
 * Moodle.NRW / Ruhr University Bochum, Matthias Buttgereit: Code, Ideating
@@ -943,6 +948,7 @@ Moodle an Hochschulen e.V. would like to thank these main contributors (in alpha
 * Ruhr University Bochum, Melanie Treitinger: Code, Ideating
 * RWTH Aachen, Amrita Deb Dutta: Code
 * RWTH Aachen, Josha Bartsch: Code
+* RWTH Aachen, Tim Schröder: Code
 * Solent University, Mark Sharp: Code
 * ssystems GmbH, Alexander Bias: Code, Peer Review, Ideating, Funding
 * Technische Universität Berlin, Lars Bonczek: Code
