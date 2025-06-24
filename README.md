@@ -1,7 +1,7 @@
 moodle-theme_boost_union
 ========================
 
-[![Moodle Plugin CI](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union/actions/workflows/moodle-plugin-ci.yml/badge.svg?branch=MOODLE_404_STABLE)](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3AMOODLE_404_STABLE)
+[![Moodle Plugin CI](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union/actions/workflows/moodle-plugin-ci.yml/badge.svg?branch=MOODLE_405_STABLE)](https://github.com/moodle-an-hochschulen/moodle-theme_boost_union/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3AMOODLE_405_STABLE)
 
 Theme Boost Union is an enhanced child theme of Boost which is intended, on the one hand, to make Boost simply more configurable and, on the other hand, to provide helpful additional features for the daily Moodle operation of admins, teachers and students.
 
@@ -9,7 +9,7 @@ Theme Boost Union is an enhanced child theme of Boost which is intended, on the 
 Requirements
 ------------
 
-This theme requires Moodle 4.4+
+This theme requires Moodle 4.5+
 
 
 Motivation for this theme
@@ -611,7 +611,7 @@ In this tab, you can enable and configure multiple slides to be shown on site ho
 
 In this tab there are the following settings:
 
-##### Course related hints
+##### Course related hints for teachers
 
 ###### Show hint for switched role
 
@@ -625,13 +625,19 @@ With this setting a hint will not only appear in the course header but also in f
 
 With this setting a hint will appear in the course header as long as the visibility of the course is hidden.
 
-###### Show hint for guest access
-
-With this setting a hint will appear in the course header when a user is accessing it with the guest access feature.
-
 ###### Show hint for self enrolment without enrolment key
 
 With this setting a hint will appear in the course header if the course is visible and an enrolment without enrolment key is currently possible.
+
+###### Show hint for guest access without guest password
+
+With this setting a hint will appear in the course header if the course is visible and guest access without guest password is currently possible.
+
+##### Course related hints for students
+
+###### Show hint for guest access
+
+With this setting a hint will appear in the course header when a user is accessing it with the guest access feature.
 
 #### Tab "Administration"
 
@@ -664,6 +670,10 @@ This capability is used to control who is able to configure the theme as non-adm
 ### theme/boost_union:viewhintcourseselfenrol
 
 This capability is used to control who is able to see a hint for unrestricted self enrolment in a visible course (if this feature was enabled in the theme settings). By default, it is assigned to teachers, non-editing teachers and managers.
+
+### theme/boost_union:viewhintcourseguestenrol
+
+This capability is used to control who is able to see a hint for guest access in a visible course (if this feature was enabled in the theme settings). By default, it is assigned to teachers, non-editing teachers and managers.
 
 ### theme/boost_union:viewhintinhiddencourse
 
@@ -953,6 +963,7 @@ Moodle an Hochschulen e.V. would like to thank these main contributors (in alpha
 * ssystems GmbH, Alexander Bias: Code, Peer Review, Ideating, Funding
 * Technische Universität Berlin, Lars Bonczek: Code
 * University of Bayreuth, Nikolai Jahreis: Code
+* University of California, San Francisco, Stefan Topfstedt: Code
 * University of Graz, André Menrath: Code
 * University of Lübeck, Christian Wolters: Code, Peer Review, Ideating
 * Zurich University of Applied Sciences (ZHAW): Code, Funding, Ideating

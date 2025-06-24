@@ -479,7 +479,7 @@ class course_renderer extends \core_course_renderer {
         $templatedata['id'] = $course->id;
         $templatedata['visible'] = $course->visible;
         $templatedata['fullname'] = $chelper->get_course_formatted_name($course);
-        $templatedata['viewurl'] = new moodle_url('/course/view.php', ['id' => $course->id]);
+        $templatedata['viewurl'] = new \core\url('/course/view.php', ['id' => $course->id]);
 
         // Amend course image, if enabled.
         if ($templatedata['showcourseimage']) {
@@ -645,7 +645,7 @@ class course_renderer extends \core_course_renderer {
         if ($chelper->get_show_courses() == self::COURSECAT_SHOW_COURSES_COUNT
                 && ($coursescount = $coursecat->get_courses_count())) {
             $categoryname .= html_writer::tag('span', $coursescount,
-                    array('title' => get_string('numberofcourses'), 'class' => 'numberofcourse badge badge-pill badge-secondary ml-2'));
+                    array('title' => get_string('numberofcourses'), 'class' => 'numberofcourse badge badge-pill badge-secondary ms-2'));
         }
         $content .= html_writer::start_tag('div', array('class' => 'info'));
 
@@ -850,7 +850,7 @@ class course_renderer extends \core_course_renderer {
         // It is slightly fragile as we rely just on the URL of the script and do not know if it will be called
         // by some other code which must not be modified in the future.
         // But it should hopyfully be ok for now.
-        if ($this->page->url->compare(new moodle_url('/course/category.ajax.php'), URL_MATCH_BASE)) {
+        if ($this->page->url->compare(new \core\url('/course/category.ajax.php'), URL_MATCH_BASE)) {
             // Allow modification.
             return true;
         }
@@ -871,7 +871,7 @@ class course_renderer extends \core_course_renderer {
         // Iterate over these pages.
         foreach ($pageswithboostunionmodification as $page) {
             // Check if user is on one of the other allowed pages.
-            if ($this->page->url->compare(new moodle_url($page), URL_MATCH_BASE)) {
+            if ($this->page->url->compare(new \core\url($page), URL_MATCH_BASE)) {
                 // Allow modification.
                 return true;
             }

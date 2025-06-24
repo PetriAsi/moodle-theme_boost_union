@@ -159,7 +159,7 @@ if (isset($enableaccessibilitysupportsetting) &&
 
         // Add marker to show this link.
         $templatecontext['accessibilitybutton'] = true;
-        $templatecontext['accessibilitybuttonlink'] = new moodle_url('/theme/boost_union/accessibility/support.php');
+        $templatecontext['accessibilitybuttonlink'] = new \core\url('/theme/boost_union/accessibility/support.php');
         $templatecontext['accessibilitybuttonsrlinktitle'] = theme_boost_union_get_accessibility_srlinktitle();
     }
 

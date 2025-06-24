@@ -456,7 +456,7 @@ class flavour_edit_form extends \moodleform {
         // If slasharguments is disabled.
         if (empty($CFG->slasharguments)) {
             // Add a warning notification to the form.
-            $slashargumentsurl = new moodle_url('/admin/search.php', ['query' => 'slasharguments']);
+            $slashargumentsurl = new \core\url('/admin/search.php', ['query' => 'slasharguments']);
             $notification = new \core\output\notification(
                     get_string('warningslashargumentsdisabled', 'theme_boost_union', ['url' => $slashargumentsurl]),
                     \core\output\notification::NOTIFY_WARNING);

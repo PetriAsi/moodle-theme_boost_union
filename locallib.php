@@ -54,7 +54,7 @@ function theme_boost_union_get_course_related_hints() {
         $hintcoursehiddentext = '';
 
         // The general hint will only be shown when the course is viewed.
-        if ($PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)) {
+        if ($PAGE->url->compare(new core\url('/course/view.php'), URL_MATCH_BASE)) {
             // Use the default hint text for hidden courses.
             $hintcoursehiddentext = get_string('showhintcoursehiddengeneral', 'theme_boost_union');
         }
@@ -62,9 +62,9 @@ function theme_boost_union_get_course_related_hints() {
         // If the setting showhintcoursehiddennotifications is set too and we view a forum (e.g. announcement) within a hidden
         // course a hint will be shown that no notifications via forums will be sent out to students.
         if (get_config('theme_boost_union', 'showhintforumnotifications') == THEME_BOOST_UNION_SETTING_SELECT_YES
-                && ($PAGE->url->compare(new moodle_url('/mod/forum/view.php'), URL_MATCH_BASE) ||
-                        $PAGE->url->compare(new moodle_url('/mod/forum/discuss.php'), URL_MATCH_BASE) ||
-                        $PAGE->url->compare(new moodle_url('/mod/forum/post.php'), URL_MATCH_BASE))) {
+                && ($PAGE->url->compare(new core\url('/mod/forum/view.php'), URL_MATCH_BASE) ||
+                        $PAGE->url->compare(new core\url('/mod/forum/discuss.php'), URL_MATCH_BASE) ||
+                        $PAGE->url->compare(new core\url('/mod/forum/post.php'), URL_MATCH_BASE))) {
             // Use the specialized hint text for hidden courses on forum pages.
             $hintcoursehiddentext = get_string('showhintforumnotifications', 'theme_boost_union');
         }
@@ -92,7 +92,7 @@ function theme_boost_union_get_course_related_hints() {
     if (get_config('theme_boost_union', 'showhintcourseguestaccess') == THEME_BOOST_UNION_SETTING_SELECT_YES
             && is_guest(\context_course::instance($COURSE->id), $USER->id)
             && $PAGE->has_set_url()
-            && $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)
+            && $PAGE->url->compare(new core\url('/course/view.php'), URL_MATCH_BASE)
             && !is_role_switched($COURSE->id)) {
 
         // Require self enrolment library.
@@ -126,13 +126,56 @@ function theme_boost_union_get_course_related_hints() {
         $html .= $OUTPUT->render_from_template('theme_boost_union/course-hint-guestaccess', $templatecontext);
     }
 
+    // If the setting showhintcourseguestenrol is set, a hint for users is shown that the course allows unrestricted guest access.
+    // This hint is only shown if the course is visible, the guest acess is enabled and if the user has the
+    // capability "theme/boost_union:viewhintcourseguestenrol".
+    if (get_config('theme_boost_union', 'showhintcourseguestenrol') == THEME_BOOST_UNION_SETTING_SELECT_YES
+            && has_capability('theme/boost_union:viewhintcourseguestenrol', \context_course::instance($COURSE->id))
+            && $PAGE->has_set_url()
+            && $PAGE->url->compare(new core\url('/course/view.php'), URL_MATCH_BASE)
+            && $COURSE->visible == true) {
+
+        // Get the active enrol instances for this course.
+        $enrolinstances = enrol_get_instances($COURSE->id, true);
+
+        // Iterate over the instances.
+        foreach ($enrolinstances as $instance) {
+            // Check if unrestricted guest access is possible.
+            if ($instance->enrol == 'guest' && empty($instance->password)) {
+
+                // Prepare template context.
+                $templatecontext = ['courseid' => $COURSE->id];
+
+                // Add the flag if guest auth is enabled (and users without Moodle accounts can access the course as well).
+                if ($CFG->guestloginbutton == 1) {
+                    $templatecontext['guestauthenabled'] = true;
+                } else {
+                    $templatecontext['guestauthenabled'] = false;
+                }
+
+                // If the user has the capability to config guest enrolments, add the call for action to the template context.
+                if (has_capability('enrol/guest:config', \context_course::instance($COURSE->id))) {
+                    $templatecontext['showenrolsettingslink'] = true;
+                } else {
+                    $templatecontext['showenrolsettingslink'] = false;
+                }
+
+                // Render template and add it to HTML code.
+                $html .= $OUTPUT->render_from_template('theme_boost_union/course-hint-guestenrol', $templatecontext);
+
+                // Skip the rest of the loop.
+                break;
+            }
+        }
+    }
+
     // If the setting showhintcourseselfenrol is set, a hint for users is shown that the course allows unrestricted self
     // enrolment. This hint is only shown if the course is visible, the self enrolment is visible and if the user has the
     // capability "theme/boost_union:viewhintcourseselfenrol".
     if (get_config('theme_boost_union', 'showhintcourseselfenrol') == THEME_BOOST_UNION_SETTING_SELECT_YES
             && has_capability('theme/boost_union:viewhintcourseselfenrol', \context_course::instance($COURSE->id))
             && $PAGE->has_set_url()
-            && $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)
+            && $PAGE->url->compare(new core\url('/course/view.php'), URL_MATCH_BASE)
             && $COURSE->visible == true) {
 
         // Get the active enrol instances for this course.
@@ -226,9 +269,9 @@ function theme_boost_union_get_course_related_hints() {
             foreach ($selfenrolinstances as $selfenrolinstanceid => $selfenrolinstanceobject) {
                 // If the user has the capability to config self enrolments, enrich the instance name with the settings link.
                 if (has_capability('enrol/self:config', \context_course::instance($COURSE->id))) {
-                    $url = new moodle_url('/enrol/editinstance.php', ['courseid' => $COURSE->id,
+                    $url = new core\url('/enrol/editinstance.php', ['courseid' => $COURSE->id,
                             'id' => $selfenrolinstanceid, 'type' => 'self', ]);
-                    $selfenrolinstanceobject->name = html_writer::link($url, $selfenrolinstanceobject->name);
+                    $selfenrolinstanceobject->name = core\output\html_writer::link($url, $selfenrolinstanceobject->name);
                 }
 
                 // Add the enrolment instance information to the template context depending on the instance configuration.
@@ -282,7 +325,7 @@ function theme_boost_union_get_course_related_hints() {
         $role = $opts->metadata['rolename'];
 
         // Get the URL to switch back (normal role).
-        $url = new moodle_url('/course/switchrole.php',
+        $url = new core\url('/course/switchrole.php',
                 ['id' => $COURSE->id,
                         'sesskey' => sesskey(),
                         'switchrole' => 0,
@@ -308,7 +351,7 @@ function theme_boost_union_get_course_related_hints() {
  */
 function theme_boost_union_get_staticpage_link($page) {
     // Compose the URL object.
-    $url = new moodle_url('/theme/boost_union/pages/'.$page.'.php');
+    $url = new core\url('/theme/boost_union/pages/'.$page.'.php');
 
     // Return the string representation of the URL.
     return $url->out();
@@ -345,7 +388,7 @@ function theme_boost_union_get_staticpage_pagetitle($page) {
  */
 function theme_boost_union_get_accessibility_link($page) {
     // Compose the URL object.
-    $url = new moodle_url('/theme/boost_union/accessibility/'.$page.'.php');
+    $url = new core\url('/theme/boost_union/accessibility/'.$page.'.php');
 
     // Return the string representation of the URL.
     return $url->out();
@@ -640,7 +683,7 @@ function theme_boost_union_get_urloftilebackgroundimage($tileno) {
         $file = reset($files);
 
         // Build and return the image URL.
-        return moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
+        return core\url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
                 $file->get_itemid(), $file->get_filepath(), $file->get_filename());
     }
 
@@ -686,7 +729,7 @@ function theme_boost_union_get_urlofslidebackgroundimage($slideno) {
         $file = reset($files);
 
         // Build and return the image URL.
-        return moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
+        return core\url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
                 $file->get_itemid(), $file->get_filepath(), $file->get_filename());
     }
 
@@ -711,7 +754,7 @@ function theme_boost_union_get_loginbackgroundimage_scss() {
     foreach ($files as $file) {
         $count++;
         // Get url from file.
-        $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
+        $url = core\url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
                 $file->get_itemid(), $file->get_filepath(), $file->get_filename());
         // Add this url to the body class loginbackgroundimage[n] as a background image.
         $scss .= 'body.pagelayout-login.loginbackgroundimage'.$count.' {';
@@ -801,9 +844,9 @@ function theme_boost_union_get_additionalresources_templatecontext() {
         // Iterate over the files and fill the templatecontext of the file list.
         $filesforcontext = [];
         foreach ($files as $af) {
-            $urlpersistent = new moodle_url('/pluginfile.php/' . $systemcontext->id .
+            $urlpersistent = new core\url('/pluginfile.php/' . $systemcontext->id .
                 '/theme_boost_union/additionalresources/0/' . $af->get_filename());
-                $urlrevisioned = new moodle_url('/pluginfile.php/' . $systemcontext->id .
+                $urlrevisioned = new core\url('/pluginfile.php/' . $systemcontext->id .
                 '/theme_boost_union/additionalresources/' . theme_get_revision().
                 '/' . $af->get_filename());
             $filesforcontext[] = ['filename' => $af->get_filename(),
@@ -862,7 +905,7 @@ function theme_boost_union_get_customfonts_templatecontext() {
             }
 
             // Otherwise, fill the templatecontext of the file list.
-            $urlpersistent = new moodle_url('/pluginfile.php/'. $systemcontext->id .
+            $urlpersistent = new core\url('/pluginfile.php/'. $systemcontext->id .
                 '/theme_boost_union/customfonts/0/' . $filename);
             $filesforcontext[] = ['filename' => $filename,
                     'fileurlpersistent' => $urlpersistent->out(), ];
@@ -1091,7 +1134,7 @@ function theme_boost_union_get_course_header_image_url() {
         $file = reset($files);
 
         // Build and return the image URL.
-        return moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
+        return core\url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
             $file->get_itemid(), $file->get_filepath(), $file->get_filename());
     }
 
@@ -1115,7 +1158,7 @@ function theme_boost_union_set_mobilecss_url() {
         // This parameter isn't the theme revision as the theme cache is not cleared when this setting is stored.
         // It is just the time when the setting is saved.
         // This is the best we can do to make the Mobile app load the new styles when needed.
-        $mobilescssurl = new moodle_url('/theme/boost_union/mobile/styles.php', ['rev' => time()]);
+        $mobilescssurl = new core\url('/theme/boost_union/mobile/styles.php', ['rev' => time()]);
 
         // Set the $CFG->mobilecssurl setting.
         set_config('mobilecssurl', $mobilescssurl->out());
@@ -1378,7 +1421,7 @@ function theme_boost_union_get_modicon_templatecontext () {
 /**
  * Returns the SCSS code to modify the activity icon purpose.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_scss_for_activity_icon_purpose($theme) {
@@ -1462,7 +1505,7 @@ function theme_boost_union_get_scss_for_activity_icon_purpose($theme) {
 /**
  * Returns the SCSS code to add an external link icon after external links to mark them visually.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_scss_to_mark_external_links($theme) {
@@ -1523,23 +1566,25 @@ function theme_boost_union_get_scss_to_mark_external_links($theme) {
             // a course).
             // * The "Give feedback about this software" link in the questionmark menu (if the $CFG->enableuserfeedback setting
             // is enabled).
+            // * The "EXIF remover" link on /admin/settings.php?section=exifremover.
             // * Anything else which is shown in the call-to-action notification banners on the Dashboard
             // (Currently just the "Give feedback about this software" link as well).
             // These icons become obsolete now. We remove them with the sledgehammer.
-            $scss .= '.footer-support-link a[href^="https://moodle.com/help/"] .fa-external-link,
-                    .footer-support-link a[target="_blank"] .fa-external-link';
+            $scss .= '.footer-support-link a[href^="https://moodle.com/help/"] .fa-arrow-up-right-from-square,
+                    .footer-support-link a[target="_blank"] .fa-arrow-up-right-from-square';
             if (!empty($CFG->servicespage)) {
-                $scss .= ', .footer-support-link a[href="'.$CFG->servicespage.'"] .fa-external-link';
+                $scss .= ', .footer-support-link a[href="'.$CFG->servicespage.'"] .fa-arrow-up-right-from-square';
             }
             if (!empty($CFG->supportpage)) {
-                $scss .= ', a[href="'.$CFG->supportpage.'"] .fa-external-link';
+                $scss .= ', a[href="'.$CFG->supportpage.'"] .fa-arrow-up-right-from-square';
             }
             if (!empty($CFG->enableuserfeedback)) {
-                $scss .= ', a[href^="https://feedback.moodle.org"] .fa-external-link,
-                a[href^="https://feedback.moodle.org"] .ml-1';
+                $scss .= ', a[href^="https://feedback.moodle.org"] .fa-arrow-up-right-from-square,
+                a[href^="https://feedback.moodle.org"] .ms-1';
             }
-            $scss .= ', a[href^="'.get_docs_url().'"] .fa-external-link,
-                    div.cta a .fa-external-link {
+            $scss .= ', a[href^="'.get_docs_url().'"] .fa-arrow-up-right-from-square,
+                    a[href^="https://exiftool.sourceforge.net"] .fa-arrow-up-right-from-square,
+                    div.cta a .fa-arrow-up-right-from-square {
                 display: none;
             }';
         }
@@ -1550,7 +1595,7 @@ function theme_boost_union_get_scss_to_mark_external_links($theme) {
 /**
  * Returns the SCSS to add a broken-chain symbol in front of broken links and make the font red to mark them visually.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_scss_to_mark_broken_links($theme) {
@@ -1586,7 +1631,7 @@ function theme_boost_union_get_scss_to_mark_broken_links($theme) {
 /**
  * Returns the SCSS to add an envelope symbol in front of mailto links to mark them visually.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_scss_to_mark_mailto_links($theme) {
@@ -1628,7 +1673,7 @@ function theme_boost_union_get_scss_to_mark_mailto_links($theme) {
  * Returns the SCSS code to hide the course image and/or the course progress in the course overview block, depending
  * on the theme settings courseoverviewshowcourseimages and courseoverviewshowcourseprogress respectively.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_scss_courseoverview_block($theme) {
@@ -1721,7 +1766,7 @@ function theme_boost_union_get_loginpage_methods() {
 /**
  * Returns the SCSS code to re-order the elements of the login form, depending on the theme settings loginorder*.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_scss_login_order($theme) {
@@ -1931,7 +1976,7 @@ function theme_boost_union_get_touchicons_html_for_page() {
             if ($file->exists == true) {
                 // Build the file URL.
                 $systemcontext = \context_system::instance();
-                $fileurl = new moodle_url('/pluginfile.php/' . $systemcontext->id . '/theme_boost_union/touchiconsios/' .
+                $fileurl = new core\url('/pluginfile.php/' . $systemcontext->id . '/theme_boost_union/touchiconsios/' .
                     theme_get_revision().'/'.$file->filename);
 
                 // Compose and append the HTML tag.
@@ -2036,7 +2081,7 @@ function theme_boost_union_get_navbar_starredcoursespopover() {
 
         if ($course->visible || $canviewhiddencourses) {
             $coursesfortemplate[] = [
-                'url' => new \moodle_url('/course/view.php', ['id' => $course->id]),
+                'url' => new \core\url('/course/view.php', ['id' => $course->id]),
                 'fullname' => $course->fullname,
                 'visible' => $course->visible == 1,
             ];
@@ -2058,13 +2103,13 @@ function theme_boost_union_get_navbar_starredcoursespopover() {
     $cogiconlinktarget = get_config('theme_boost_union', 'starredcourseslinktarget');
     switch($cogiconlinktarget) {
         case THEME_BOOST_UNION_SETTING_STARREDCOURSES_LINKTARGET_DASHBOARD:
-            $cogiconlinktargeturl = new moodle_url('/my/');
+            $cogiconlinktargeturl = new \core\url('/my/');
             $cogiconlinktargettitle =
                     get_string('shownavbarstarredcourses_config', 'theme_boost_union', get_string('myhome', 'core'));
             break;
         case THEME_BOOST_UNION_SETTING_STARREDCOURSES_LINKTARGET_MYCOURSES:
         default:
-            $cogiconlinktargeturl = new moodle_url('/my/courses.php');
+            $cogiconlinktargeturl = new \core\url('/my/courses.php');
             $cogiconlinktargettitle =
                     get_string('shownavbarstarredcourses_config', 'theme_boost_union', get_string('mycourses', 'core'));
             break;
@@ -2356,9 +2401,9 @@ function theme_boost_union_get_accessibility_support_skip_link() {
                 (isloggedin() && !isguestuser())) {
 
             // Add link for screen readers to accessibility support page.
-            $supporturl = new moodle_url('/theme/boost_union/accessibility/support.php');
+            $supporturl = new \core\url('/theme/boost_union/accessibility/support.php');
             $supporttitle = theme_boost_union_get_accessibility_srlinktitle();
-            $output .= html_writer::link($supporturl, $supporttitle, [
+            $output .= \core\output\html_writer::link($supporturl, $supporttitle, [
                 'id' => 'access-support-form-sr-link',
                 'class' => 'sr-only sr-only-focusable',
             ]);
@@ -2464,9 +2509,9 @@ function theme_boost_union_manipulate_hooks() {
 
         // Get list of all files with callbacks, one per component.
         $components = ['core' => "{$CFG->dirroot}/lib/db/hooks.php"];
-        $plugintypes = \core_component::get_plugin_types();
+        $plugintypes = \core\component::get_plugin_types();
         foreach ($plugintypes as $plugintype => $plugintypedir) {
-            $plugins = \core_component::get_plugin_list($plugintype);
+            $plugins = \core\component::get_plugin_list($plugintype);
             foreach ($plugins as $pluginname => $plugindir) {
                 if (!$plugindir) {
                     continue;

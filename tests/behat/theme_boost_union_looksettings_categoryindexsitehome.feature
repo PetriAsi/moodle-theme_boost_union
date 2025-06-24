@@ -487,8 +487,8 @@ Feature: Configuring the theme_boost_union plugin for the "Category index / site
     When I log in as "student1"
     And I am on the "CATA" category page
     Then "<selector>" "css_element" should exist in the ".course_category_tree" "css_element"
-    And ".fa-unlock-alt" "css_element" should exist in the "<selector> .enrolmenticon:nth-of-type(1)" "css_element"
-    And ".fa-sign-in" "css_element" should exist in the "<selector> .enrolmenticon:nth-of-type(2)" "css_element"
+    And ".fa-lock-open" "css_element" should exist in the "<selector> .enrolmenticon:nth-of-type(1)" "css_element"
+    And ".fa-right-to-bracket" "css_element" should exist in the "<selector> .enrolmenticon:nth-of-type(2)" "css_element"
 
     Examples:
       | coursevalue | selector                         |
@@ -696,44 +696,44 @@ Feature: Configuring the theme_boost_union plugin for the "Category index / site
     Then "<selector>" "css_element" should exist in the "#frontpage-category-combo" "css_element"
     And I click on "<selector>" "css_element" in the "#frontpage-category-combo" "css_element"
     And ".modal-dialog" "css_element" should be visible
-    And I click on ".modal-dialog button.close" "css_element"
+    And I click on ".modal-dialog .btn-close" "css_element"
     # Check a subcategory in the 'Combo list' view on site home
     And I reload the page
     And I click on ".info" "css_element" in the "#frontpage-category-combo > .course_category_tree > .content > .subcategories > .category.with_children:nth-child(3) > .content > .subcategories > .category.with_children" "css_element"
     And "<selector>" "css_element" should exist in the "#frontpage-category-combo > .course_category_tree > .content > .subcategories > .category.with_children:nth-child(3) > .content > .subcategories > .category.with_children" "css_element"
     And I click on "<selector>" "css_element" in the "#frontpage-category-combo > .course_category_tree > .content > .subcategories > .category.with_children:nth-child(3) > .content > .subcategories > .category.with_children" "css_element"
     And ".modal-dialog" "css_element" should be visible
-    And I click on ".modal-dialog button.close" "css_element"
+    And I click on ".modal-dialog .btn-close" "css_element"
     # Check the 'Enrolled courses' view on site home
     And I reload the page
     And "<selector>" "css_element" should exist in the "#frontpage-course-list" "css_element"
     And I click on "<selector>" "css_element" in the "#frontpage-course-list" "css_element"
     And ".modal-dialog" "css_element" should be visible
-    And I click on ".modal-dialog button.close" "css_element"
+    And I click on ".modal-dialog .btn-close" "css_element"
     # Check the 'List of courses' view on site home
     And I reload the page
     And "<selector>" "css_element" should exist in the "#frontpage-available-course-list" "css_element"
     And I click on "<selector>" "css_element" in the "#frontpage-available-course-list" "css_element"
     And ".modal-dialog" "css_element" should be visible
-    And I click on ".modal-dialog button.close" "css_element"
+    And I click on ".modal-dialog .btn-close" "css_element"
     # Check the categoriy overview page of a category without subcategories
     And I am on the "CATA" category page
     Then "<selector>" "css_element" should exist in the ".course_category_tree" "css_element"
     And I click on "<selector>" "css_element" in the ".course_category_tree" "css_element"
     And ".modal-dialog" "css_element" should be visible
-    And I click on ".modal-dialog button.close" "css_element"
+    And I click on ".modal-dialog .btn-close" "css_element"
     # Check the categoriy overview page of a category with subcategories
     And I am on the "CATB" category page
     Then "<selector>" "css_element" should exist in the ".course_category_tree" "css_element"
     And I click on "<selector>" "css_element" in the ".course_category_tree" "css_element"
     And ".modal-dialog" "css_element" should be visible
-    And I click on ".modal-dialog button.close" "css_element"
+    And I click on ".modal-dialog .btn-close" "css_element"
     And I reload the page
     And I click on ".info" "css_element" in the ".course_category_tree > .content > .subcategories > .category.with_children" "css_element"
     And "<selector>" "css_element" should exist in the ".course_category_tree > .content > .subcategories > .category.with_children" "css_element"
     And I click on "<selector>" "css_element" in the ".course_category_tree > .content > .subcategories > .category.with_children" "css_element"
     And ".modal-dialog" "css_element" should be visible
-    And I click on ".modal-dialog button.close" "css_element"
+    And I click on ".modal-dialog .btn-close" "css_element"
 
     Examples:
       | coursevalue | selector                               |

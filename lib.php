@@ -147,7 +147,7 @@ define('THEME_BOOST_UNION_SETTING_STARREDCOURSES_LINKTARGET_DASHBOARD', 'dashboa
 /**
  * Returns the main SCSS content.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_main_scss_content($theme) {
@@ -161,7 +161,7 @@ function theme_boost_union_get_main_scss_content($theme) {
 
     // Get and include the main SCSS from Boost Core.
     // This particularly covers the theme preset which is set in Boost Core and not Boost Union.
-    $scss .= theme_boost_get_main_scss_content(theme_config::load('boost'));
+    $scss .= theme_boost_get_main_scss_content(\core\output\theme_config::load('boost'));
 
     // Include post.scss from Boost Union.
     $scss .= file_get_contents($CFG->dirroot . '/theme/boost_union/scss/boost_union/post.scss');
@@ -179,7 +179,7 @@ function theme_boost_union_get_main_scss_content($theme) {
 /**
  * Get SCSS to prepend.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_pre_scss($theme) {
@@ -222,7 +222,7 @@ function theme_boost_union_get_pre_scss($theme) {
     // Due to the described call chain, Boost Union Child won't get all the necessary pre SCSS.
     // Thus, we fetch Boost's pre SCSS if the current theme is not Union itself (i.e. a Boost Union Child theme is active).
     if (theme_boost_union_is_active_childtheme() == true) {
-        $scss .= theme_boost_get_pre_scss(theme_config::load('boost_union'));
+        $scss .= theme_boost_get_pre_scss(\core\output\theme_config::load('boost_union'));
     }
 
     // Include pre.scss from Boost Union.
@@ -385,7 +385,7 @@ function theme_boost_union_get_pre_scss($theme) {
 /**
  * Inject additional SCSS.
  *
- * @param theme_config $theme The theme config object.
+ * @param \core\output\theme_config $theme The theme config object.
  * @return string
  */
 function theme_boost_union_get_extra_scss($theme) {
@@ -429,7 +429,7 @@ function theme_boost_union_get_extra_scss($theme) {
     // Due to the described call chain, Boost Union Child won't get all the necessary extra SCSS.
     // Thus, we fetch Boost's extra SCSS if the current theme is not Union itself (i.e. a Boost Union Child theme is active).
     if (theme_boost_union_is_active_childtheme() == true) {
-        $content .= theme_boost_get_extra_scss(theme_config::load('boost_union'));
+        $content .= theme_boost_get_extra_scss(\core\output\theme_config::load('boost_union'));
     }
 
     // Now, in contrast to Boost core, Boost Union should add the login page background to the body element as well.
@@ -642,7 +642,7 @@ function theme_boost_union_pluginfile($course, $cm, $context, $filearea, $args, 
                 $filearea === 'touchiconsios' ||
                 preg_match("/tilebackgroundimage[2-9]|1[0-2]?/", $filearea) ||
                 preg_match("/slidebackgroundimage[2-9]|1[0-2]?/", $filearea))) {
-        $theme = theme_config::load('boost_union');
+        $theme = \core\output\theme_config::load('boost_union');
         // By default, theme files must be cache-able by both browsers and proxies.
         if (!array_key_exists('cacheability', $options)) {
             $options['cacheability'] = 'public';
@@ -762,7 +762,7 @@ function theme_boost_union_output_fragment_icons_list($args) {
         $icons = [];
 
         // Load the theme config.
-        $theme = \theme_config::load($PAGE->theme->name);
+        $theme = \core\output\theme_config::load($PAGE->theme->name);
 
         // Get the FA system.
         $faiconsystem = \core\output\icon_system_fontawesome::instance($theme->get_icon_system());
@@ -785,7 +785,7 @@ function theme_boost_union_output_fragment_icons_list($args) {
             $component = isset($icon[0]) ? $icon[0] : '';
 
             // Render the pix icon.
-            $icon = new \pix_icon($iconstr,  "", $component);
+            $icon = new \core\output\pix_icon($iconstr,  "", $component);
             $icons[] = [
                 'icon' => $faiconsystem->render_pix_icon($OUTPUT, $icon),
                 'value' => $iconkey,
@@ -801,7 +801,7 @@ function theme_boost_union_output_fragment_icons_list($args) {
 /**
  * Define preferences which may be set via the core_user_set_user_preferences external function.
  *
- * @uses core_user::is_current_user
+ * @uses \core\user::is_current_user
  *
  * @return array[]
  */
@@ -814,7 +814,7 @@ function theme_boost_union_user_preferences(): array {
             'null' => NULL_NOT_ALLOWED,
             'default' => 0,
             'choices' => [0, 1],
-            'permissioncallback' => [core_user::class, 'is_current_user'],
+            'permissioncallback' => [\core\user::class, 'is_current_user'],
         ];
     }
     return $preferences;
@@ -886,7 +886,7 @@ function theme_boost_union_alter_css_urls(&$urls) {
         // Iterate over the CSS URLs.
         foreach (array_keys($urls) as $i) {
             // If we have a moodle_url object.
-            if ($urls[$i] instanceof moodle_url) {
+            if ($urls[$i] instanceof \core\url) {
                 // Take the flavour CSS URL and escape it to be used in a regular expression.
                 $pathstyles = preg_quote($CFG->wwwroot . '/theme/styles.php', '|');
                 // Replace the CSS URL with the flavour CSS URL.

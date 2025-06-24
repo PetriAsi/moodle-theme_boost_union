@@ -143,6 +143,7 @@
         a.dropdown-item:hover,
         a.dropdown-item:focus {
             background-color: #343a40;
+            color: $white;
         }
     }
 
@@ -181,6 +182,7 @@
         a.dropdown-item:hover,
         a.dropdown-item:focus {
             background-color: $primary;
+            color: $white;
         }
     }
 
@@ -563,7 +565,7 @@
 #page-course-search {
     .paging:has(+ .theme_boost_union-courselisting-wrapper),
     .theme_boost_union-courselisting-wrapper ~ .paging {
-        @extend .text-right;
+        @extend .text-end;
 
         a {
             @extend .btn;
@@ -644,7 +646,7 @@ body.hascourseindexcmicons {
             /* And move the section title in the course index slightly to the right to align it vertically with the
                activity title (which is now slightly more right as well) again. */
             .courseindex-chevron {
-                padding-right: 14px;
+                padding-right: 12px;
             }
         }
     }
@@ -657,16 +659,10 @@ body.hascourseindexcmicons {
                 display: none;
             }
 
-            /* And hide the drag icon at the end of the line completely as Moodle core just disables its visibility,
-               but we need the space now for the completion icon. */
-            .courseindex-item .dragicon {
-                display: none;
-            }
-
             /* And move the section title in the course index slightly to the right to align it vertically with the
                activity title (which is now slightly more right as well) again. */
             .courseindex-chevron {
-                padding-right: 14px;
+                padding-right: 12px;
             }
         }
     }
@@ -678,6 +674,11 @@ body.hascourseindexcmicons {
             .courseindex-cmicon-cpl-eol {
                 display: none;
             }
+
+            /* And move the activity icon slightly closer to the completion icon. */
+            .courseindex-item .completioninfo {
+                min-width: 20px;
+            }
         }
     }
 
@@ -687,11 +688,6 @@ body.hascourseindexcmicons {
             /* Hide all completion info elements. */
             span.completioninfo {
                 display: none;
-            }
-
-            /* Re-show the dragicon in editing mode. The visibility will still be controlled by Moodle core. */
-            .courseindex-item .dragicon {
-                display: block;
             }
         }
     }
@@ -712,16 +708,16 @@ body.hascourseindexcmicons {
             justify-content: center;
             align-items: center;
             .icon {
-                height: 24px;
+                height: 20px;
                 margin-right: unset;
-                width: 24px;
+                width: 20px;
             }
         }
 
         /* Gain back the vertical space which was given to the icon by reducing the vertical padding of each courseindex
            element by 0.1rem. */
         .courseindex-item {
-            padding: .45rem .5rem;
+            padding: .45rem 0 .45rem .5rem;
         }
 
         /* Overwrite activity type icon style for dimmed activities. */
@@ -752,15 +748,6 @@ body.hascourseindexcmicons {
                 filter: brightness(0) invert(1);
             }
         }
-    }
-}
-
-/* For some situations, add some more right padding to the collapse icon to align the texts in the course index again. */
-body.hascourseindexcplicon,
-body.hascourseindexcpleol,
-body.hascourseindexcplsol.editing {
-    .courseindex-section-title .icons-collapse-expand {
-        padding-right: 8px;
     }
 }
 
@@ -1724,6 +1711,7 @@ body.theme_boost-union-footerbuttonnone.jsenabled {
 
 .course-hint-hidden,
 .course-hint-guestaccess,
+.course-hint-guestenrol,
 .course-hint-selfenrol,
 .course-hint-switchedrole {
     margin-left: 15px;
@@ -1982,6 +1970,13 @@ body.theme_boost-union-footerbuttonnone.jsenabled {
                 a {
                     display: flex;
                     align-items: center;
+                    &.dimmed {
+                        color: $text-muted;
+                        &.dropdown-item:hover {
+                            color: $white;
+                            opacity: .7;
+                        }
+                    }
                     label {
                         margin-bottom: 0;
                     }

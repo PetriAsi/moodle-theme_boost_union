@@ -43,6 +43,9 @@ $PAGE->set_pagelayout('login');
 // Set page context.
 $PAGE->set_context(context_system::instance());
 
+// Do not allow caching of this page.
+$PAGE->set_cacheable(false);
+
 // Get theme config.
 $config = get_config('theme_boost_union');
 
@@ -55,7 +58,7 @@ if ($config->sideentranceloginenable != THEME_BOOST_UNION_SETTING_SELECT_ALWAYS 
         $config->loginlocalloginenable != THEME_BOOST_UNION_SETTING_SELECT_NO &&
         empty($CFG->alternateloginurl)) {
     echo $OUTPUT->header();
-    $loginurl = new moodle_url('/login/index.php');
+    $loginurl = new core\url('/login/index.php');
     $notification = new \core\output\notification(
             get_string('loginlocalloginlocalnotdisabled', 'theme_boost_union', ['url' => $loginurl]),
             \core\output\notification::NOTIFY_INFO);
@@ -84,7 +87,7 @@ echo $OUTPUT->header();
 
 // Prepare the local login form.
 $templatecontext = [];
-$templatecontext['loginurl'] = new moodle_url('/login/index.php');
+$templatecontext['loginurl'] = new core\url('/login/index.php');
 $templatecontext['logintoken'] = \core\session\manager::get_login_token();
 
 // Output the local login form.

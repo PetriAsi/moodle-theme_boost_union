@@ -60,7 +60,7 @@ class admin_settingspage_tabs_with_tertiary extends \theme_boost_admin_settingsp
     /**
      * Curently active URL for the tertiary navigation.
      *
-     * @var \moodle_url
+     * @var \core\url
      */
     protected $selectoractiveurl = null;
 
@@ -94,10 +94,10 @@ class admin_settingspage_tabs_with_tertiary extends \theme_boost_admin_settingsp
     /**
      * Add an tertiary navigation item.
      *
-     * @param \moodle_url $url The URL of the tertiary navigation item.
+     * @param \core\url $url The URL of the tertiary navigation item.
      * @param string $label The label of the tertiary navigation item.
      */
-    public function add_tertiary_item(\moodle_url $url, string $label) {
+    public function add_tertiary_item(\core\url $url, string $label) {
         $this->tertiaryitems[] = [
             'url' => $url,
             'label' => $label,
@@ -108,9 +108,9 @@ class admin_settingspage_tabs_with_tertiary extends \theme_boost_admin_settingsp
      * Override the active URL for the tertiary navigation.
      * This is necessary especially on external admin pages which contain subpages.
      *
-     * @param \moodle_url $url
+     * @param \core\url $url
      */
-    public function override_selector_active_url(\moodle_url $url) {
+    public function override_selector_active_url(\core\url $url) {
         $this->selectoractiveurl = $url->out(false);
     }
 
@@ -120,25 +120,25 @@ class admin_settingspage_tabs_with_tertiary extends \theme_boost_admin_settingsp
      */
     private function init_boost_union_tertiary_settings() {
         // First, add all Boost Union setting pages.
-        $this->add_tertiary_item(new \moodle_url('/admin/settings.php', ['section' => 'theme_boost_union_look']),
+        $this->add_tertiary_item(new \core\url('/admin/settings.php', ['section' => 'theme_boost_union_look']),
                 get_string('configtitlelook', 'theme_boost_union', null, true));
 
-        $this->add_tertiary_item(new \moodle_url('/admin/settings.php', ['section' => 'theme_boost_union_feel']),
+        $this->add_tertiary_item(new \core\url('/admin/settings.php', ['section' => 'theme_boost_union_feel']),
                 get_string('configtitlefeel', 'theme_boost_union', null, true));
 
-        $this->add_tertiary_item(new \moodle_url('/admin/settings.php', ['section' => 'theme_boost_union_content']),
+        $this->add_tertiary_item(new \core\url('/admin/settings.php', ['section' => 'theme_boost_union_content']),
                 get_string('configtitlecontent', 'theme_boost_union', null, true));
 
-        $this->add_tertiary_item(new \moodle_url('/admin/settings.php', ['section' => 'theme_boost_union_functionality']),
+        $this->add_tertiary_item(new \core\url('/admin/settings.php', ['section' => 'theme_boost_union_functionality']),
                 get_string('configtitlefunctionality', 'theme_boost_union', null, true));
 
-        $this->add_tertiary_item(new \moodle_url('/admin/settings.php', ['section' => 'theme_boost_union_accessibility']),
+        $this->add_tertiary_item(new \core\url('/admin/settings.php', ['section' => 'theme_boost_union_accessibility']),
                 get_string('configtitleaccessibility', 'theme_boost_union', null, true));
 
-        $this->add_tertiary_item(new \moodle_url('/theme/boost_union/flavours/overview.php'),
+        $this->add_tertiary_item(new \core\url('/theme/boost_union/flavours/overview.php'),
                 get_string('configtitleflavours', 'theme_boost_union', null, true));
 
-        $this->add_tertiary_item(new \moodle_url('/theme/boost_union/smartmenus/menus.php'),
+        $this->add_tertiary_item(new \core\url('/theme/boost_union/smartmenus/menus.php'),
                 get_string('smartmenus', 'theme_boost_union', null, true));
 
         // Then, add navigation items for all Boost Union Child themes.
@@ -162,7 +162,7 @@ class admin_settingspage_tabs_with_tertiary extends \theme_boost_admin_settingsp
         }
 
         // Finally, add the category overview link.
-        $this->add_tertiary_item(new \moodle_url('/admin/category.php', ['category' => 'theme_boost_union']),
+        $this->add_tertiary_item(new \core\url('/admin/category.php', ['category' => 'theme_boost_union']),
                 get_string('settingsoverview_all', 'theme_boost_union', null, true));
     }
 
@@ -230,10 +230,10 @@ class admin_settingspage_tabs_with_tertiary extends \theme_boost_admin_settingsp
     /**
      * Return the tertiary navigation items for an external settings page.
      *
-     * @param \moodle_url|null $overrideactiveurl The URL to override the active URL for the tertiary navigation.
+     * @param \core\url|null $overrideactiveurl The URL to override the active URL for the tertiary navigation.
      * @return string
      */
-    public static function get_tertiary_navigation_for_externalpage(?\moodle_url $overrideactiveurl = null) {
+    public static function get_tertiary_navigation_for_externalpage(?\core\url $overrideactiveurl = null) {
         // Initialize a dummy instance of this class, just to get the tertiary navigation.
         $instance = new self('Dummy', 'Dummy');
 
