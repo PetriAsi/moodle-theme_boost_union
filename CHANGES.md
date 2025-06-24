@@ -4,8 +4,10 @@ moodle-theme_boost_union
 Changes
 -------
 
-### v4.5-r20
+### v5.0-r4
 
+* 2025-06-09 - Upstream change: Remove preemptive regression fix after MDL-85326 was integrated, resolves #928.
+               Please note: This change raises the required Moodle core version to 5.0.1
 * 2025-06-09 - Tests: Fix a failing Behat test on the 'Allow admins to use the tertiary navigation' scenario, resolves #973
 * 2025-06-06 - Upstream change: Adopt changes from MDL-85323 to locallogin.php
 * 2025-06-06 - Upstream change: Adopt changes from MDL-85450 to upcoming-mini.mustache
@@ -13,18 +15,65 @@ Changes
 * 2025-06-04 - Bugfix: Enabling the footersuppresslogininfo setting prevented the reset of the failed login attempts counter, resolves #658
 * 2025-06-04 - Bugfix: Prevent debug message regarding newly introduced "displayhiddencourses" and "hiddencoursesort" option in dynamic courses items, resolves #970
 
-### v4.5-r19
+### v5.0-r3
 
 * 2025-05-30 - Improvement: Smart menus now display hidden courses to users with the appropriate capability, resolves #407.
                Please note: With this change, existing dynamic courses smart menu items will start to show hidden courses as this is what most users expect. If you do not want to show hidden courses, please change the newly introduced 'Show hidden courses' setting in your existing menu items after the theme update.
 * 2025-05-30 - Improvement: Transform the plain paragraphs on some settings pages into Bootstrap alerts for a nicer look.
 * 2025-05-27 - Bugfix: The page scrolled to the top when a dynamic courses submenu got clicked, resolves #962.
 
-### v4.5-r18
+### v5.0-r2
 
+* 2025-05-26 - Bugfix: Language selector menu for visitors did not respect navbar color, resolves #966.
+* 2025-05-26 - Bugfix: Main navigation more menu did not respect navbar color, resolves #967
 * 2025-05-26 - Improvement: Enhance course related hint for guest access for teachers by a possibility to build own guest access link, resolves #960.
+* 2025-05-25 - Bugfix: Fix a faulty HTML structure in the slider feature, resolves #965.
 * 2025-05-23 - Feature: Add course related hint for guest access for teachers as well, resolves #960.
 * 2025-05-23 - Improvement: Re-sort the settings for the course related hints.
+
+### v5.0-r1
+
+* 2025-04-10 - Upgrade: Replace Bootstrap class custom-select with form-select
+* 2025-05-17 - Upgrade: Failing smart menu Behat tests on Moodle 5.0, resolves #929.
+* 2025-05-17 - Upgrade: Adopt changes from /lib/amd/src/usermenu.js to /theme/boost_union/amd/src/submenu.js, resolves #913.
+* 2025-04-10 - Upgrade: Fix the inline-block presentation of the date settings in the infobanner settings.
+* 2025-05-08 - Preemptive regression fix: Moodle 5.0 showed the footer (questionmark) icon on mobiles as well, resolves #928.
+* 2025-04-10 - Upgrade: Remove the 'none' option from the slider animation type as this seems not to anymore out of the box in Bootstrap 5.
+* 2025-04-10 - Upgrade: Adapt some more deprecated Bootstrap classes.
+* 2025-04-10 - Improvement: Change the defaults of the theme/boost_union:viewregion* capabilities for the guest role on new Boost Union installatins, resolves #893.
+               Please note: Boost Union instances which are upgraded from a release before v5.0 will see a notification on /admin/settings.php?section=theme_boost_union_feel#theme_boost_union_feel_blocks and will have the possibility there to fix the defaults of the role automatically.
+* 2025-04-10 - Upgrade: Adapt width of advertisement tiles on site home, resolves #917.
+* 2025-04-10 - Upgrade: Support the new activity overview page when changing activity icon purposes in Boost Union.
+* 2025-04-10 - Upgrade: Remove recentlyaccesseditemstintenabled setting as the icons in this block are tinted by default now in Moodle 5.0.
+* 2025-04-10 - Upgrade: Adapt activity coloring for Moodle 5.0 and remove the activityiconcolorfidelity setting, resolves #824.
+* 2025-04-10 - Upgrade: Remove activitiestintenabled setting as the activities block is gone in Moodle 5.0.
+* 2025-04-10 - Upgrade: Adapt Behat tests as the subsections are now enabled by default
+* 2025-04-10 - Upgrade: Adopt changes regarding dismisssing alerts for the infobanner feature in Boost Union
+* 2025-04-10 - Upgrade: Adopt Bootstrap changes to the media-breakpoint-down mixin
+* 2025-04-10 - Upgrade: Adopt Bootstrap changes to the slider feature in Boost Union
+* 2025-04-10 - Upgrade: Fix the appearance of the off-canvas block region
+* 2025-04-10 - Upgrade: Adopt changes for course index view feature in Boost Union
+* 2025-04-10 - Upgrade: Adopt changes to other sr-only classes used in Boost Union
+* 2025-04-10 - Upgrade: Adopt changes to submenu.js
+* 2025-04-10 - Upgrade: Adopt changes to other data-bs-* attributes used in Boost Union
+* 2025-04-10 - Upgrade: Adopt changes to courselistingcard.mustache
+* 2025-04-10 - Upgrade: Adopt changes to courselistinglist.mustache
+* 2025-04-10 - Upgrade: Adopt changes to smartmenus-*menu-children.mustache
+* 2025-04-10 - Upgrade: Adopt changes to cm.mustache
+* 2025-04-10 - Upgrade: Adopt changes to user_menu.mustache
+* 2025-04-10 - Upgrade: Adopt changes to loginform.mustache
+* 2025-04-10 - Upgrade: Adopt changes to moremenu.mustache
+* 2025-04-10 - Upgrade: Adopt changes to primary-drawer-mobile.mustache
+* 2025-04-10 - Preemptive regression fix: Communication button in course did not use the same Bootstrap 5 styling as the footer (questionmark) button, resolves #912.
+* 2025-04-10 - Upgrade: Adopt changes to footer.mustache and all Boost Union footer buttons.
+* 2025-04-10 - Upgrade: Adopt changes to drawers.mustache
+* 2025-04-10 - Upgrade: Adopt changes to classes/boostnavbar.php
+* 2025-04-10 - Upgrade: Adopt changes to drawer.mustache
+* 2025-04-10 - Upgrade: Adopt Bootstrap changes to navbar.mustache and the colored navbar feature.
+               Please note: The bg-dark color has changed in Bootstrap 5 which results in Boost Union in a even darker navbar.
+* 2025-04-10 - Upgrade: Remove mediumwidth setting, resolves #780
+* 2025-04-10 - Upgrade: Replace the $nav-divider-color SCSS variable in post.scss which does not exist anymore and prevented the Boost Union SCSS from being compiled.
+* 2025-04-10 - Prepare compatibility for Moodle 5.0.
 
 ### v4.5-r17
 

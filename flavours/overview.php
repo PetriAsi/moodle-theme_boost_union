@@ -117,7 +117,7 @@ echo \theme_boost_union\admin_settingspage_tabs_with_tertiary::get_tertiary_navi
 $intro = new \core\output\notification(
         get_string('flavoursoverview_desc', 'theme_boost_union'), \core\output\notification::NOTIFY_INFO);
 $intro->set_show_closebutton(false);
-$intro->set_extra_classes(['mb-5', 'alert-dark']);
+$intro->set_extra_classes(['mb-5', 'alert-light']);
 echo $OUTPUT->render($intro);
 
 // Prepare 'Create flavours' button.

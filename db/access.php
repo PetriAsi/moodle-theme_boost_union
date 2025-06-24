@@ -71,6 +71,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the header block region.
@@ -92,6 +93,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the outsideleft block region.
@@ -113,6 +115,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the outsideright block region.
@@ -134,6 +137,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the outsidetop block region.
@@ -155,6 +159,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the outsidebottom block region.
@@ -176,6 +181,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the contentupper block region.
@@ -197,6 +203,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the contentlower block region.
@@ -218,6 +225,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the footerleft block region.
@@ -239,6 +247,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the footerright block region.
@@ -260,6 +269,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the footercenter block region.
@@ -281,6 +291,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the offcanvas left block region.
@@ -302,6 +313,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the offcanvas right block region.
@@ -323,6 +335,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         ],
     ],
     // Ability to edit the offcanvas center block region.
