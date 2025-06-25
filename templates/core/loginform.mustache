@@ -151,102 +151,103 @@
         <a href="{{signupurl}}" class="visually-hidden">{{#str}} tocreatenewaccount {{/str}}</a>
     {{/cansignup}}
     <div id="theme_boost_union-loginorder">
-    {{#hasidentityproviders}}
-    <div id="theme_boost_union-loginorder-idp" class="theme_boost_union-loginmethod">
-        <div class="login-divider"></div>
-        <div class="login-identityproviders">
-            {{#showidploginintro}}
-            <h2 class="login-heading">{{#str}} potentialidps, auth {{/str}}</h2>
-            {{/showidploginintro}}
-            
-            {{^splitidentityproviders}}
-                {{#identityproviders}}
-                    <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
-                        {{#iconurl}}
-                            <img src="{{iconurl}}" alt="" width="24" height="24"/>
-                        {{/iconurl}}
-                        {{name}}
-                    </a>
-                {{/identityproviders}}
-            {{/splitidentityproviders}}
+        {{#hasidentityproviders}}
+        <div id="theme_boost_union-loginorder-idp" class="theme_boost_union-loginmethod">
+            <div class="login-divider"></div>
+            <div class="login-identityproviders">
+                {{#showidploginintro}}
+                <h2 class="login-heading">{{#str}} potentialidps, auth {{/str}}</h2>
+                {{/showidploginintro}}
+                
+                {{^splitidentityproviders}}
+                    {{#identityproviders}}
+                        <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
+                            {{#iconurl}}
+                                <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                            {{/iconurl}}
+                            {{name}}
+                        </a>
+                    {{/identityproviders}}
+                {{/splitidentityproviders}}
 
-            {{#splitidentityproviders}}
-                {{#identityprovidersoidc}}
-                    <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
-                        {{#iconurl}}
-                            <img src="{{iconurl}}" alt="" width="24" height="24"/>
-                        {{/iconurl}}
-                        {{name}}
-                    </a>
-                {{/identityprovidersoidc}}
-            {{/splitidentityproviders}}
-        </div>
-    </div>
-    {{/hasidentityproviders}}
-    {{#showlocallogin}}
-    <div class="login-divider"></div>
-    <button class="btn btn-block btn-secondary" type="button" data-toggle="collapse" data-target="#login" id="togglelogin">Muut käyttäjät</button>
-    <div id="theme_boost_union-loginorder-local" class="theme_boost_union-loginmethod">
-    <div class="login-divider"></div>
-    {{#showlocalloginintro}}
-    <h2 class="login-heading">{{#str}} loginlocalintro, theme_boost_union {{/str}}</h2>
-    {{/showlocalloginintro}}
-    <form class="login-form collapse" action="{{loginurl}}" method="post" id="login">
-        <input id="anchor" type="hidden" name="anchor" value="">
-        <script>document.getElementById('anchor').value = location.hash;</script>
-        <input type="hidden" name="logintoken" value="{{logintoken}}">
-        <div class="login-form-username mb-3">
-            <label for="username" class="visually-hidden">
-                {{^canloginbyemail}}
-                    {{#str}} email {{/str}}
-                {{/canloginbyemail}}
-                {{#canloginbyemail}}
-                    {{#str}} email {{/str}}
-                {{/canloginbyemail}}
-            </label>
-            <input type="text" name="username" id="username" {{!
-                !}}class="form-control form-control-lg" {{!
-                !}}value="{{username}}" {{!
-                !}}placeholder="{{^canloginbyemail}}{{#cleanstr}}email{{/cleanstr}}{{/canloginbyemail}}{{!
-                !}}{{#canloginbyemail}}{{#cleanstr}}email{{/cleanstr}}{{/canloginbyemail}}" {{!
-                !}}autocomplete="email">
-        </div>
-        <div class="login-form-password mb-3 hidden">
-            <label for="password" class="visually-hidden">{{#str}} password {{/str}}</label>
-            <input type="password" name="password" id="password" value="" {{!
-                !}}class="form-control form-control-lg" {{!
-                !}}placeholder="{{#cleanstr}}password{{/cleanstr}}" {{!
-                !}}autocomplete="current-password">
-        </div>
-        {{#recaptcha}}
-            <div class="login-form-recaptcha mb-3">
-                {{{recaptcha}}}
+                {{#splitidentityproviders}}
+                    {{#identityprovidersoidc}}
+                        <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
+                            {{#iconurl}}
+                                <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                            {{/iconurl}}
+                            {{name}}
+                        </a>
+                    {{/identityprovidersoidc}}
+                {{/splitidentityproviders}}
             </div>
-        {{/recaptcha}}
-        <div class="login-form-submit mb-3 hidden">
-            <button class="btn btn-primary btn-lg" type="submit" id="loginbtn">{{#str}}login{{/str}}</button>
         </div>
-    {{#hasidentityproviders}}
-        <div class="login-identityproviders">
+        {{/hasidentityproviders}}
+        {{#showlocallogin}}
+            <div class="login-divider"></div>
+            <button class="btn btn-block btn-secondary" type="button" data-toggle="collapse" data-target="#login" id="togglelogin">Muut käyttäjät</button>
+            <div id="theme_boost_union-loginorder-local" class="theme_boost_union-loginmethod">
+                <div class="login-divider"></div>
+                {{#showlocalloginintro}}
+                <h2 class="login-heading">{{#str}} loginlocalintro, theme_boost_union {{/str}}</h2>
+                {{/showlocalloginintro}}
+                <form class="login-form collapse" action="{{loginurl}}" method="post" id="login">
+                    <input id="anchor" type="hidden" name="anchor" value="">
+                    <script>document.getElementById('anchor').value = location.hash;</script>
+                    <input type="hidden" name="logintoken" value="{{logintoken}}">
+                    <div class="login-form-username mb-3">
+                        <label for="username" class="visually-hidden">
+                            {{^canloginbyemail}}
+                                {{#str}} email {{/str}}
+                            {{/canloginbyemail}}
+                            {{#canloginbyemail}}
+                                {{#str}} email {{/str}}
+                            {{/canloginbyemail}}
+                        </label>
+                        <input type="text" name="username" id="username" {{!
+                            !}}class="form-control form-control-lg" {{!
+                            !}}value="{{username}}" {{!
+                            !}}placeholder="{{^canloginbyemail}}{{#cleanstr}}email{{/cleanstr}}{{/canloginbyemail}}{{!
+                            !}}{{#canloginbyemail}}{{#cleanstr}}email{{/cleanstr}}{{/canloginbyemail}}" {{!
+                            !}}autocomplete="email">
+                    </div>
+                    <div class="login-form-password mb-3 hidden">
+                        <label for="password" class="visually-hidden">{{#str}} password {{/str}}</label>
+                        <input type="password" name="password" id="password" value="" {{!
+                            !}}class="form-control form-control-lg" {{!
+                            !}}placeholder="{{#cleanstr}}password{{/cleanstr}}" {{!
+                            !}}autocomplete="current-password">
+                    </div>
+                    {{#recaptcha}}
+                        <div class="login-form-recaptcha mb-3">
+                            {{{recaptcha}}}
+                        </div>
+                    {{/recaptcha}}
+                    <div class="login-form-submit mb-3 hidden">
+                        <button class="btn btn-primary btn-lg" type="submit" id="loginbtn">{{#str}}login{{/str}}</button>
+                    </div>
+                    {{#hasidentityproviders}}
+                        <div class="login-identityproviders">
+                            {{#splitidentityproviders}}
+                                <div id="theme_boost_union-loginorder-idp-rest" class="theme_boost_union-loginmethod">
+                                    {{#identityprovidersrest}}
+                                        <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
+                                            {{#iconurl}}
+                                                <img src="{{iconurl}}" alt="" width="24" height="24"/>
+                                            {{/iconurl}}
+                                            {{name}}
+                                        </a>
+                                    {{/identityprovidersrest}}
+                                </div>
+                            {{/splitidentityproviders}}
+                        </div>
+                    {{/hasidentityproviders}}
+                    </form>
+                </div>
+        {{/showlocallogin}}
         
-        {{#splitidentityproviders}}
-        <div id="theme_boost_union-loginorder-idp-rest" class="theme_boost_union-loginmethod">
-                {{#identityprovidersrest}}
-                    <a class="btn login-identityprovider-btn btn-block btn-secondary" href="{{url}}">
-                        {{#iconurl}}
-                            <img src="{{iconurl}}" alt="" width="24" height="24"/>
-                        {{/iconurl}}
-                        {{name}}
-                    </a>
-                {{/identityprovidersrest}}
-        </div>
-      {{/splitidentityproviders}}
-        </div>
-    {{/hasidentityproviders}}
-
-    </form>
     </div>
-    {{/showlocallogin}}
+    
     
     <div id="theme_boost_union-loginorder-firsttimesignup" class="theme_boost_union-loginmethod">
     {{#hasinstructions}}
