@@ -185,13 +185,13 @@
         {{/hasidentityproviders}}
         {{#showlocallogin}}
             <div class="login-divider"></div>
-           <button class="btn btn-secondary btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#theme_boost_union-loginorder-local" id="togglelogin" aria-expanded="false" aria-controls="theme_boost_union-loginorder-local">Muut käyttäjät</button>^M
-            <div id="theme_boost_union-loginorder-local" class="theme_boost_union-loginmethod collapse">^M
-                <div class="login-divider"></div>^M
-                {{#showlocalloginintro}}^M
-                <h2 class="login-heading">{{#str}} loginlocalintro, theme_boost_union {{/str}}</h2>^M
-                {{/showlocalloginintro}}^M
-                <form class="login-form" action="{{loginurl}}" method="post" id="login">^M
+           <button class="btn btn-secondary btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#theme_boost_union-loginorder-local" id="togglelogin" aria-expanded="false" aria-controls="theme_boost_union-loginorder-local">Muut käyttäjät</button>
+            <div id="theme_boost_union-loginorder-local" class="theme_boost_union-loginmethod collapse">
+                <div class="login-divider"></div>
+                {{#showlocalloginintro}}
+                <h2 class="login-heading">{{#str}} loginlocalintro, theme_boost_union {{/str}}</h2>
+                {{/showlocalloginintro}}
+                <form class="login-form" action="{{loginurl}}" method="post" id="login">
                     <input id="anchor" type="hidden" name="anchor" value="">
                     <script>document.getElementById('anchor').value = location.hash;</script>
                     <input type="hidden" name="logintoken" value="{{logintoken}}">
