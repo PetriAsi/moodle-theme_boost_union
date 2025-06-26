@@ -264,7 +264,7 @@ $string['loginbackgroundimagepositionsetting'] = 'Kirjautumissivun taustakuvan s
 $string['loginbackgroundimagepositionsetting_desc'] = 'Tällä asetuksella hallitset kirjautumissivun taustakuvan sijoittamista selainikkunassa. Ensimmäinen arvo on vaakasuuntainen sijainti, toinen arvo on pystysuuntainen sijainti.';
 // ... ... Setting: Login page background image text.
 $string['loginbackgroundimagetextsetting'] = 'Näytä teksti kirjautumissivun taustakuville';
-$string['loginbackgroundimagetextsetting_desc'] = 'Tällä valinnaisella asetuksella voit lisätä tekstiä, esim. tekijänoikeusilmoituksen, lataamillesi taustakuville. Tämä teksti näkyy sivun alatunnisteen yläpuolella kirjautumissivulla. Kuitenkin, näytön kiinteän tilan vuoksi, se näytetään vain suuremmilla näytön ko'oilla.<br/>
+$string['loginbackgroundimagetextsetting_desc'] = 'Tällä valinnaisella asetuksella voit lisätä tekstiä, esim. tekijänoikeusilmoituksen, lataamillesi taustakuville. Tämä teksti näkyy sivun alatunnisteen yläpuolella kirjautumissivulla. Kuitenkin, näytön kiinteän tilan vuoksi, se näytetään vain suuremmilla näytöillä.<br/>
 Jokainen rivi koostuu tiedoston tunnisteesta (tiedoston nimestä), näytettävästä tekstistä ja tekstiväristä, jotka on erotettu putki-merkillä. Jokainen ilmoitus on kirjoitettava uudelle riville. <br/>
 Esimerkiksi:<br/>
 background-image-1.jpg|Tekijänoikeus: CC0|tumma<br/>
