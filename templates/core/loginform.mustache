@@ -185,7 +185,7 @@
         {{/hasidentityproviders}}
         {{#showlocallogin}}
             <div class="login-divider"></div>
-            <button class="btn btn-block btn-secondary" type="button" data-toggle="collapse" data-target="#login" id="togglelogin">Muut käyttäjät</button>
+            <button class="btn btn-secondary btn-lg" type="button" data-toggle="collapse" data-target="#login" id="togglelogin">Muut käyttäjät</button>
             <div id="theme_boost_union-loginorder-local" class="theme_boost_union-loginmethod">
                 <div class="login-divider"></div>
                 {{#showlocalloginintro}}
@@ -250,18 +250,18 @@
     
     
     <div id="theme_boost_union-loginorder-firsttimesignup" class="theme_boost_union-loginmethod">
-    {{#hasinstructions}}
-        <div class="login-divider"></div>
-        <div class="login-instructions {{#cansignup}}mb-3{{/cansignup}}">
-            <h2 class="login-heading">{{#str}}firsttime{{/str}}</h2>
-            {{{instructions}}}
-        </div>
-    {{/hasinstructions}}
-    {{#cansignup}}
-        <div class="login-signup">
-            <a class="btn btn-secondary" href="{{signupurl}}">{{#str}}startsignup{{/str}}</a>
-        </div>
-    {{/cansignup}}
+        {{#hasinstructions}}
+            <div class="login-divider"></div>
+            <div class="login-instructions {{#cansignup}}mb-3{{/cansignup}}">
+                <h2 class="login-heading">{{#str}}firsttime{{/str}}</h2>
+                {{{instructions}}}
+            </div>
+        {{/hasinstructions}}
+        {{#cansignup}}
+            <div class="login-signup">
+                <a class="btn btn-secondary" href="{{signupurl}}">{{#str}}startsignup{{/str}}</a>
+            </div>
+        {{/cansignup}}
     </div>
     {{#canloginasguest}}
     <div id="theme_boost_union-loginorder-guest" class="theme_boost_union-loginmethod">
