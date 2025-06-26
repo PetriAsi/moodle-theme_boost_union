@@ -363,11 +363,11 @@ $string['courselistinghowfields_desc'] = 'Tällä asetuksella voit hallita, näk
 // ... ... Setting: Show goto button in the course listing.
 $string['courselistinghowgoto'] = 'Näytä siirry kurssiin -painike kurssiluettelossa';
 $string['courselistinghowgoto_desc'] = 'Tällä asetuksella voit hallita, näytetäänkö "Siirry kurssiin" -painike kurssiluettelossa vai ei. Jos tämä asetus on pois käytöstä, käyttäjä voi silti siirtyä kurssille napsauttamalla kurssin nimeä tai kurssikuvaa.';
-$string['courselistinggoto'] = 'Siirry kurssille';
+$string['courselistinggoto'] = 'Kurssille';
 // ... ... Setting: Show details popup in the course listing.
-$string['courselistinghowpopup'] = 'Näytä yksityiskohtien ponnahdusikkuna kurssiluettelossa';
-$string['courselistinghowpopup_desc'] = 'Tällä asetuksella voit hallita, näytetäänkö "Kurssin tiedot" -painike kurssiluettelossa vai ei. Tämän painikkeen avulla käyttäjä voi avata yksityiskohtien ponnahdusikkunan, joka sisältää kurssin yhteenvedon, kurssiyhteyshenkilöt ja kurssikentät. Ponnahdusikkuna sisältää tämän tiedon riippumatta siitä, oletko ottanut sen käyttöön itse kurssikortilla/rivillä vai et.';
-$string['courselistingpopup'] = 'Yksityiskohdat';
+$string['courselistinghowpopup'] = 'Näytä lisätietojen ponnahdusikkuna kurssiluettelossa';
+$string['courselistinghowpopup_desc'] = 'Tällä asetuksella voit hallita, näytetäänkö "Kurssin tiedot" -painike kurssiluettelossa vai ei. Tämän painikkeen avulla käyttäjä voi avata lisätietojen ponnahdusikkunan, joka sisältää kurssin yhteenvedon, kurssiyhteyshenkilöt ja kurssikentät. Ponnahdusikkuna sisältää tämän tiedon riippumatta siitä, oletko ottanut sen käyttöön itse kurssikortilla/rivillä vai et.';
+$string['courselistingpopup'] = 'Lisätiedot';
 $string['courselistingummary'] = 'Kurssin yhteenveto';
 $string['courselistingnosummary'] = 'Tällä kurssilla ei ole yhteenvetoa';
 $string['courselistingcontacts'] = 'Kurssin yhteyshenkilö';
